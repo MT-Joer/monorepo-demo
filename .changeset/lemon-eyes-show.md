@@ -1,0 +1,5 @@
+---
+'@vben/docs': major
+---
+
+ss

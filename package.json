@@ -14,14 +14,9 @@
     "vue vben admin pro",
     "vue3"
   ],
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
-  "repository": "vbenjs/vue-vben-admin.git",
-  "license": "MIT",
   "author": {
-    "name": "vben",
-    "email": "ann.vben@gmail.com",
-    "url": "https://github.com/anncwb"
+    "name": "Joer",
+    "email": "shijie@didihu.com.cn"
   },
   "type": "module",
   "scripts": {
@@ -51,7 +46,6 @@
     "dev:play": "pnpm -F @vben/playground run dev",
     "format": "vsh lint --format",
     "lint": "vsh lint",
-    "postinstall": "pnpm -r run stub --if-present",
     "preinstall": "npx only-allow pnpm",
     "preview": "turbo-run preview",
     "publint": "vsh publint",
@@ -60,7 +54,8 @@
     "test:e2e": "turbo run test:e2e",
     "update:deps": "npx taze -r -w",
     "version": "pnpm exec changeset version && pnpm install --no-frozen-lockfile",
-    "catalog": "pnpx codemod pnpm/catalog"
+    "catalog": "pnpx codemod pnpm/catalog",
+    "postinstall": "pnpm -r run stub --if-present"
   },
   "devDependencies": {
     "@changesets/changelog-github": "catalog:",

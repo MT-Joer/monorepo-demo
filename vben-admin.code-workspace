@@ -5,6 +5,10 @@
       "path": "apps/backend-mock",
     },
     {
+      "name": "@vben/playground",
+      "path": "apps/playground",
+    },
+    {
       "name": "@vben/web-antd",
       "path": "apps/web-antd",
     },
@@ -159,10 +163,6 @@
     {
       "name": "@vben/utils",
       "path": "packages/utils",
-    },
-    {
-      "name": "@vben/playground",
-      "path": "playground",
     },
     {
       "name": "@vben/turbo-run",
