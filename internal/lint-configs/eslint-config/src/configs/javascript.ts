@@ -44,10 +44,7 @@ export async function javascript(): Promise<Linter.Config[]> {
 			},
 			rules: {
 				...js.configs.recommended.rules,
-				'accessor-pairs': [
-					'error',
-					{ enforceForClassMembers: true, setWithoutGet: true },
-				],
+				'accessor-pairs': ['error', { enforceForClassMembers: true, setWithoutGet: true }],
 				'array-callback-return': 'error',
 				'block-scoped-var': 'error',
 				'constructor-super': 'error',
@@ -56,10 +53,7 @@ export async function javascript(): Promise<Linter.Config[]> {
 				eqeqeq: ['error', 'always'],
 				'keyword-spacing': 'off',
 
-				'new-cap': [
-					'error',
-					{ capIsNew: false, newIsCap: true, properties: true },
-				],
+				'new-cap': ['error', { capIsNew: false, newIsCap: true, properties: true }],
 				'no-alert': 'error',
 				'no-array-constructor': 'error',
 				'no-async-promise-executor': 'error',
@@ -94,10 +88,7 @@ export async function javascript(): Promise<Linter.Config[]> {
 				'no-invalid-regexp': 'error',
 				'no-irregular-whitespace': 'error',
 				'no-iterator': 'error',
-				'no-labels': [
-					'error',
-					{ allowLoop: false, allowSwitch: false },
-				],
+				'no-labels': ['error', { allowLoop: false, allowSwitch: false }],
 				'no-lone-blocks': 'error',
 				'no-loss-of-precision': 'error',
 				'no-misleading-character-class': 'error',
@@ -122,8 +113,7 @@ export async function javascript(): Promise<Linter.Config[]> {
 				'no-restricted-properties': [
 					'error',
 					{
-						message:
-							'Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.',
+						message: 'Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.',
 						property: '__proto__',
 					},
 					{
@@ -135,13 +125,11 @@ export async function javascript(): Promise<Linter.Config[]> {
 						property: '__defineSetter__',
 					},
 					{
-						message:
-							'Use `Object.getOwnPropertyDescriptor` instead.',
+						message: 'Use `Object.getOwnPropertyDescriptor` instead.',
 						property: '__lookupGetter__',
 					},
 					{
-						message:
-							'Use `Object.getOwnPropertyDescriptor` instead.',
+						message: 'Use `Object.getOwnPropertyDescriptor` instead.',
 						property: '__lookupSetter__',
 					},
 				],
@@ -187,10 +175,7 @@ export async function javascript(): Promise<Linter.Config[]> {
 						vars: 'all',
 					},
 				],
-				'no-use-before-define': [
-					'error',
-					{ classes: false, functions: false, variables: false },
-				],
+				'no-use-before-define': ['error', { classes: false, functions: false, variables: false }],
 				'no-useless-backreference': 'error',
 				'no-useless-call': 'error',
 				'no-useless-catch': 'error',
@@ -200,11 +185,7 @@ export async function javascript(): Promise<Linter.Config[]> {
 				'no-useless-return': 'error',
 				'no-var': 'error',
 				'no-with': 'error',
-				'object-shorthand': [
-					'error',
-					'always',
-					{ avoidQuotes: true, ignoreConstructors: false },
-				],
+				'object-shorthand': ['error', 'always', { avoidQuotes: true, ignoreConstructors: false }],
 				'one-var': ['error', { initialized: 'never' }],
 				'prefer-arrow-callback': [
 					'error',
@@ -223,10 +204,7 @@ export async function javascript(): Promise<Linter.Config[]> {
 				'prefer-exponentiation-operator': 'error',
 
 				'prefer-promise-reject-errors': 'error',
-				'prefer-regex-literals': [
-					'error',
-					{ disallowRedundantWrapping: true },
-				],
+				'prefer-regex-literals': ['error', { disallowRedundantWrapping: true }],
 				'prefer-rest-params': 'error',
 				'prefer-spread': 'error',
 				'prefer-template': 'error',
@@ -245,10 +223,7 @@ export async function javascript(): Promise<Linter.Config[]> {
 						varsIgnorePattern: '^_',
 					},
 				],
-				'use-isnan': [
-					'error',
-					{ enforceForIndexOf: true, enforceForSwitchCase: true },
-				],
+				'use-isnan': ['error', { enforceForIndexOf: true, enforceForSwitchCase: true }],
 				'valid-typeof': ['error', { requireStringLiterals: true }],
 
 				'vars-on-top': 'error',

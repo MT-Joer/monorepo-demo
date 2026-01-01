@@ -19,8 +19,7 @@ export async function vue(): Promise<Linter.Config[]> {
 	] as const);
 
 	const flatEssential = pluginVue.configs?.['flat/essential'] || [];
-	const flatStronglyRecommended =
-		pluginVue.configs?.['flat/strongly-recommended'] || [];
+	const flatStronglyRecommended = pluginVue.configs?.['flat/strongly-recommended'] || [];
 	const flatRecommended = pluginVue.configs?.['flat/recommended'] || [];
 
 	return [
@@ -82,21 +81,13 @@ export async function vue(): Promise<Linter.Config[]> {
 					},
 				],
 				// 组件在模板中使用 PascalCase 命名，便于组件识别与一致性
-				'vue/component-name-in-template-casing': [
-					'error',
-					'PascalCase',
-				],
+				'vue/component-name-in-template-casing': ['error', 'PascalCase'],
 				'vue/component-options-name-casing': ['error', 'PascalCase'],
 				'vue/custom-event-name-casing': ['error', 'camelCase'],
 				'vue/define-macros-order': [
 					'error',
 					{
-						order: [
-							'defineOptions',
-							'defineProps',
-							'defineEmits',
-							'defineSlots',
-						],
+						order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
 					},
 				],
 				'vue/dot-location': ['error', 'property'],
@@ -125,12 +116,7 @@ export async function vue(): Promise<Linter.Config[]> {
 				'vue/no-irregular-whitespace': 'error',
 				'vue/no-loss-of-precision': 'error',
 				'vue/no-reserved-component-names': 'off',
-				'vue/no-restricted-syntax': [
-					'error',
-					'DebuggerStatement',
-					'LabeledStatement',
-					'WithStatement',
-				],
+				'vue/no-restricted-syntax': ['error', 'DebuggerStatement', 'LabeledStatement', 'WithStatement'],
 				'vue/no-restricted-v-bind': ['error', '/^v-/'],
 				'vue/no-sparse-arrays': 'error',
 				'vue/no-unused-refs': 'error',
@@ -154,10 +140,7 @@ export async function vue(): Promise<Linter.Config[]> {
 				'vue/require-prop-types': 'off',
 				'vue/singleline-html-element-content-newline': 'off',
 				'vue/space-infix-ops': 'error',
-				'vue/space-unary-ops': [
-					'error',
-					{ nonwords: false, words: true },
-				],
+				'vue/space-unary-ops': ['error', { nonwords: false, words: true }],
 				'vue/v-on-event-hyphenation': [
 					'error',
 					'always',

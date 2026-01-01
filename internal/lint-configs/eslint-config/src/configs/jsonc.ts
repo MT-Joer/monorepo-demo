@@ -20,12 +20,7 @@ export async function jsonc(): Promise<Linter.Config[]> {
 
 	return [
 		{
-			files: [
-				'**/*.json',
-				'**/*.json5',
-				'**/*.jsonc',
-				'*.code-workspace',
-			],
+			files: ['**/*.json', '**/*.json5', '**/*.jsonc', '*.code-workspace'],
 			languageOptions: {
 				parser: parserJsonc as any,
 			},
@@ -130,8 +125,7 @@ function sortPackageJson(): Linter.Config {
 				},
 				{
 					order: { type: 'asc' },
-					pathPattern:
-						'^(?:dev|peer|optional|bundled)?[Dd]ependencies(Meta)?$',
+					pathPattern: '^(?:dev|peer|optional|bundled)?[Dd]ependencies(Meta)?$',
 				},
 				{
 					order: { type: 'asc' },
@@ -148,23 +142,12 @@ function sortPackageJson(): Linter.Config {
 
 function sortTsconfig(): Linter.Config {
 	return {
-		files: [
-			'**/tsconfig.json',
-			'**/tsconfig.*.json',
-			'internal/tsconfig/*.json',
-		],
+		files: ['**/tsconfig.json', '**/tsconfig.*.json', 'internal/tsconfig/*.json'],
 		rules: {
 			'jsonc/sort-keys': [
 				'error',
 				{
-					order: [
-						'extends',
-						'compilerOptions',
-						'references',
-						'files',
-						'include',
-						'exclude',
-					],
+					order: ['extends', 'compilerOptions', 'references', 'files', 'include', 'exclude'],
 					pathPattern: '^$',
 				},
 				{

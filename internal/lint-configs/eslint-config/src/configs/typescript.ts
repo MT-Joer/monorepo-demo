@@ -39,8 +39,7 @@ export async function typescript(): Promise<Linter.Config[]> {
 				'@typescript-eslint': pluginTs as any,
 			},
 			rules: {
-				...pluginTs.configs['eslint-recommended']?.overrides?.[0]
-					?.rules,
+				...pluginTs.configs['eslint-recommended']?.overrides?.[0]?.rules,
 				...pluginTs.configs.strict?.rules,
 				// 对 @ts-xxx 注释进行限制：允许带说明的忽略以便在确有必要时记录原因
 				'@typescript-eslint/ban-ts-comment': [

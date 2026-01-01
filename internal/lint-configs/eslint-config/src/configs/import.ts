@@ -20,10 +20,7 @@ export async function importPluginConfig(): Promise<Linter.Config[]> {
 			},
 			rules: {
 				// 优先在顶层位置声明类型导出，减少嵌套导致的类型混淆
-				'import/consistent-type-specifier-style': [
-					'error',
-					'prefer-top-level',
-				],
+				'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
 				// 导入应集中在文件顶部
 				'import/first': 'error',
 				// 导入后需换行以增强可读性

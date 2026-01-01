@@ -10,11 +10,7 @@
 
 import type { Linter } from 'eslint';
 
-const restrictedImportIgnores = [
-	'**/vite.config.mts',
-	'**/tailwind.config.mjs',
-	'**/postcss.config.mjs',
-];
+const restrictedImportIgnores = ['**/vite.config.mts', '**/tailwind.config.mjs', '**/postcss.config.mjs'];
 
 const customConfig: Linter.Config[] = [
 	// shadcn-ui 内部组件是自动生成的，不做太多限制
@@ -56,23 +52,19 @@ const customConfig: Linter.Config[] = [
 					patterns: [
 						{
 							group: ['#/api/*'],
-							message:
-								'The #/api package cannot be imported, please use the @core package itself',
+							message: 'The #/api package cannot be imported, please use the @core package itself',
 						},
 						{
 							group: ['#/layouts/*'],
-							message:
-								'The #/layouts package cannot be imported, please use the @core package itself',
+							message: 'The #/layouts package cannot be imported, please use the @core package itself',
 						},
 						{
 							group: ['#/locales/*'],
-							message:
-								'The #/locales package cannot be imported, please use the @core package itself',
+							message: 'The #/locales package cannot be imported, please use the @core package itself',
 						},
 						{
 							group: ['#/stores/*'],
-							message:
-								'The #/stores package cannot be imported, please use the @core package itself',
+							message: 'The #/stores package cannot be imported, please use the @core package itself',
 						},
 					],
 				},
@@ -139,8 +131,7 @@ const customConfig: Linter.Config[] = [
 					patterns: [
 						{
 							group: ['@vben/*'],
-							message:
-								'The @vben package cannot be imported, please use the @core package itself',
+							message: 'The @vben package cannot be imported, please use the @core package itself',
 						},
 					],
 				},
