@@ -15,3 +15,10 @@ export * from './turbo';
 export * from './typescript';
 export * from './unicorn';
 export * from './vue';
+
+/*
+	eslint-config/src/configs/index.ts
+
+	说明：将各子配置模块集中导出，便于 `defineConfig` 按需加载。
+	注：每个子模块负责单一职责（例如 import 规则、typescript 规则、vue 规则等），易于维护与测试。
+*/

@@ -12,14 +12,14 @@ const logoDark = computed(() => preferences.logo.sourceDark);
 </script>
 
 <template>
-  <AuthPageLayout
-    :app-name="appName"
-    :logo="logo"
-    :logo-dark="logoDark"
-    :page-description="$t('authentication.pageDesc')"
-    :page-title="$t('authentication.pageTitle')"
-  >
-    <!-- 自定义工具栏 -->
-    <!-- <template #toolbar></template> -->
-  </AuthPageLayout>
+	<AuthPageLayout
+		:app-name="appName"
+		:logo="logo"
+		:logo-dark="logoDark"
+		:page-description="$t('authentication.pageDesc')"
+		:page-title="$t('authentication.pageTitle')"
+	>
+		<!-- 自定义工具栏 -->
+		<!-- <template #toolbar></template> -->
+	</AuthPageLayout>
 </template>
