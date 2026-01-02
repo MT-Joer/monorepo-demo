@@ -6,12 +6,12 @@
   - 该插件较简洁，直接返回创建的配置对象
 */
 
-import createCommand from 'eslint-plugin-command/config';
+import createCommand from "eslint-plugin-command/config";
 
 export async function command() {
-	return [
-		{
-			...createCommand(),
-		},
-	];
+    return [
+        {
+            ...createCommand(),
+        },
+    ];
 }

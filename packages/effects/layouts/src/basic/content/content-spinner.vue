@@ -1,12 +1,12 @@
+<template>
+    <VbenSpinner :spinning="spinning" />
+</template>
 <script lang="ts" setup>
-import { VbenSpinner } from '@vben-core/shadcn-ui';
+import { VbenSpinner } from "@vben-core/shadcn-ui";
 
-import { useContentSpinner } from './use-content-spinner';
+import { useContentSpinner } from "./use-content-spinner";
 
-defineOptions({ name: 'LayoutContentSpinner' });
+defineOptions({ name: "LayoutContentSpinner" });
 
 const { spinning } = useContentSpinner();
 </script>
-<template>
-  <VbenSpinner :spinning="spinning" />
-</template>

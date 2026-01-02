@@ -1,22 +1,22 @@
 import type {
-  AccessModeType,
-  AuthPageLayoutType,
-  BreadcrumbStyleType,
-  BuiltinThemeType,
-  ContentCompactType,
-  DeepPartial,
-  LayoutHeaderMenuAlignType,
-  LayoutHeaderModeType,
-  LayoutType,
-  LoginExpiredModeType,
-  NavigationStyleType,
-  PageTransitionType,
-  PreferencesButtonPositionType,
-  TabsStyleType,
-  ThemeModeType,
-} from '@vben-core/typings';
+    AccessModeType,
+    AuthPageLayoutType,
+    BreadcrumbStyleType,
+    BuiltinThemeType,
+    ContentCompactType,
+    DeepPartial,
+    LayoutHeaderMenuAlignType,
+    LayoutHeaderModeType,
+    LayoutType,
+    LoginExpiredModeType,
+    NavigationStyleType,
+    PageTransitionType,
+    PreferencesButtonPositionType,
+    TabsStyleType,
+    ThemeModeType,
+} from "@vben-core/typings";
 
-type SupportedLanguagesType = 'en-US' | 'zh-CN';
+type SupportedLanguagesType = "en-US" | "zh-CN";
 
 interface AppPreferences {
   /** 权限模式 */
@@ -143,7 +143,7 @@ interface LogoPreferences {
   /** logo是否可见 */
   enable: boolean;
   /** logo图片适应方式 */
-  fit: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+  fit: "contain" | "cover" | "fill" | "none" | "scale-down";
   /** logo地址 */
   source: string;
   /** 暗色主题logo地址 (可选，若不设置则使用 source) */
@@ -319,20 +319,20 @@ interface InitialOptions {
   overrides?: DeepPartial<Preferences>;
 }
 export type {
-  AppPreferences,
-  BreadcrumbPreferences,
-  FooterPreferences,
-  HeaderPreferences,
-  InitialOptions,
-  LogoPreferences,
-  NavigationPreferences,
-  Preferences,
-  PreferencesKeys,
-  ShortcutKeyPreferences,
-  SidebarPreferences,
-  SupportedLanguagesType,
-  TabbarPreferences,
-  ThemePreferences,
-  TransitionPreferences,
-  WidgetPreferences,
+    AppPreferences,
+    BreadcrumbPreferences,
+    FooterPreferences,
+    HeaderPreferences,
+    InitialOptions,
+    LogoPreferences,
+    NavigationPreferences,
+    Preferences,
+    PreferencesKeys,
+    ShortcutKeyPreferences,
+    SidebarPreferences,
+    SupportedLanguagesType,
+    TabbarPreferences,
+    ThemePreferences,
+    TransitionPreferences,
+    WidgetPreferences,
 };

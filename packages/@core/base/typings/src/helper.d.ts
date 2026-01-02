@@ -1,4 +1,4 @@
-import type { ComputedRef, MaybeRef } from 'vue';
+import type { ComputedRef, MaybeRef } from "vue";
 
 /**
  * 深层递归所有属性为可选
@@ -112,21 +112,21 @@ type EmitType = (name: Name, ...args: any[]) => void;
 type MaybePromise<T> = Promise<T> | T;
 
 export type {
-  AnyFunction,
-  AnyNormalFunction,
-  AnyPromiseFunction,
-  DeepPartial,
-  DeepReadonly,
-  EmitType,
-  IntervalHandle,
-  MaybeComputedRef,
-  MaybePromise,
-  MaybeReadonlyRef,
-  Merge,
-  MergeAll,
-  NonNullable,
-  Nullable,
-  ReadonlyRecordable,
-  Recordable,
-  TimeoutHandle,
+    AnyFunction,
+    AnyNormalFunction,
+    AnyPromiseFunction,
+    DeepPartial,
+    DeepReadonly,
+    EmitType,
+    IntervalHandle,
+    MaybeComputedRef,
+    MaybePromise,
+    MaybeReadonlyRef,
+    Merge,
+    MergeAll,
+    NonNullable,
+    Nullable,
+    ReadonlyRecordable,
+    Recordable,
+    TimeoutHandle,
 };

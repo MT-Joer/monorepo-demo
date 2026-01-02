@@ -1,1 +1,1 @@
-export { default as DemoPreview } from './demo-preview.vue';
+export { default as DemoPreview } from "./demo-preview.vue";

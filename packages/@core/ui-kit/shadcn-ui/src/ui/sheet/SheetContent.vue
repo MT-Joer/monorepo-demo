@@ -1,16 +1,46 @@
+<template>
+    <Teleport defer :to="appendTo">
+        <Transition name="fade">
+            <SheetOverlay v-if="open && modal"
+                          :style="{
+                              ...(zIndex ? { zIndex } : {}),
+                              position,
+                              backdropFilter:
+                                  overlayBlur && overlayBlur > 0 ? `blur(${overlayBlur}px)` : 'none',
+                          }" />
+        </Transition>
+        <DialogContent ref="contentRef"
+                       :class="cn('z-popup', sheetVariants({ side }), props.class)"
+                       :style="{
+                           ...(zIndex ? { zIndex } : {}),
+                           position,
+                       }"
+                       v-bind="{ ...forwarded, ...$attrs }"
+                       @animationend="onAnimationEnd">
+            <slot></slot>
+
+            <!-- <DialogClose
+        class="data-[state=open]:bg-secondary absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none"
+      >
+        <Cross2Icon class="h-5 w-" />
+      </DialogClose> -->
+        </DialogContent>
+    </Teleport>
+</template>
+
 <script setup lang="ts">
-import type { DialogContentEmits, DialogContentProps } from 'reka-ui';
+import type { DialogContentEmits, DialogContentProps } from "reka-ui";
 
-import type { SheetVariants } from './sheet';
+import type { SheetVariants } from "./sheet";
 
-import { computed, ref } from 'vue';
+import { computed, ref } from "vue";
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from "@vben-core/shared/utils";
 
-import { DialogContent, useForwardPropsEmits } from 'reka-ui';
+import { DialogContent, useForwardPropsEmits } from "reka-ui";
 
-import { sheetVariants } from './sheet';
-import SheetOverlay from './SheetOverlay.vue';
+import { sheetVariants } from "./sheet";
+import SheetOverlay from "./SheetOverlay.vue";
 
 interface SheetContentProps extends DialogContentProps {
   appendTo?: HTMLElement | string;
@@ -18,16 +48,16 @@ interface SheetContentProps extends DialogContentProps {
   modal?: boolean;
   open?: boolean;
   overlayBlur?: number;
-  side?: SheetVariants['side'];
+  side?: SheetVariants["side"];
   zIndex?: number;
 }
 
 defineOptions({
-  inheritAttrs: false,
+    inheritAttrs: false,
 });
 
 const props = withDefaults(defineProps<SheetContentProps>(), {
-  appendTo: 'body',
+    appendTo: "body",
 });
 
 const emits = defineEmits<
@@ -35,73 +65,39 @@ const emits = defineEmits<
 >();
 
 const delegatedProps = computed(() => {
-  const {
-    class: _,
-    modal: _modal,
-    open: _open,
-    side: _side,
-    ...delegated
-  } = props;
+    const {
+        class: _,
+        modal: _modal,
+        open: _open,
+        side: _side,
+        ...delegated
+    } = props;
 
-  return delegated;
+    return delegated;
 });
 
 function isAppendToBody() {
-  return (
-    props.appendTo === 'body' ||
+    return (
+        props.appendTo === "body" ||
     props.appendTo === document.body ||
     !props.appendTo
-  );
+    );
 }
 
 const position = computed(() => {
-  return isAppendToBody() ? 'fixed' : 'absolute';
+    return isAppendToBody() ? "fixed" : "absolute";
 });
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 const contentRef = ref<InstanceType<typeof DialogContent> | null>(null);
 function onAnimationEnd(event: AnimationEvent) {
-  // 只有在 contentRef 的动画结束时才触发 opened/closed 事件
-  if (event.target === contentRef.value?.$el) {
-    if (props.open) {
-      emits('opened');
-    } else {
-      emits('closed');
+    // 只有在 contentRef 的动画结束时才触发 opened/closed 事件
+    if (event.target === contentRef.value?.$el) {
+        if (props.open) {
+            emits("opened");
+        } else {
+            emits("closed");
+        }
     }
-  }
 }
 </script>
-
-<template>
-  <Teleport defer :to="appendTo">
-    <Transition name="fade">
-      <SheetOverlay
-        v-if="open && modal"
-        :style="{
-          ...(zIndex ? { zIndex } : {}),
-          position,
-          backdropFilter:
-            overlayBlur && overlayBlur > 0 ? `blur(${overlayBlur}px)` : 'none',
-        }"
-      />
-    </Transition>
-    <DialogContent
-      ref="contentRef"
-      :class="cn('z-popup', sheetVariants({ side }), props.class)"
-      :style="{
-        ...(zIndex ? { zIndex } : {}),
-        position,
-      }"
-      @animationend="onAnimationEnd"
-      v-bind="{ ...forwarded, ...$attrs }"
-    >
-      <slot></slot>
-
-      <!-- <DialogClose
-        class="data-[state=open]:bg-secondary absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none"
-      >
-        <Cross2Icon class="h-5 w-" />
-      </DialogClose> -->
-    </DialogContent>
-  </Teleport>
-</template>

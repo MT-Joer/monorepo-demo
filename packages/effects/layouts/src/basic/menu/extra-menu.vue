@@ -1,13 +1,24 @@
+<template>
+    <Menu :accordion="accordion"
+          :collapse="collapse"
+          :default-active="route.meta?.activePath || route.path"
+          :menus="menus"
+          mode="vertical"
+          :rounded="rounded"
+          :theme="theme"
+          @select="handleSelect" />
+</template>
+
 <script lang="ts" setup>
-import type { MenuRecordRaw } from '@vben/types';
+import type { MenuRecordRaw } from "@vben/types";
 
-import type { MenuProps } from '@vben-core/menu-ui';
+import type { MenuProps } from "@vben-core/menu-ui";
 
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
 
-import { Menu } from '@vben-core/menu-ui';
+import { Menu } from "@vben-core/menu-ui";
 
-import { useNavigation } from './use-navigation';
+import { useNavigation } from "./use-navigation";
 
 interface Props extends MenuProps {
   collapse?: boolean;
@@ -15,27 +26,14 @@ interface Props extends MenuProps {
 }
 
 withDefaults(defineProps<Props>(), {
-  accordion: true,
-  menus: () => [],
+    accordion: true,
+    menus: () => [],
 });
 
 const route = useRoute();
 const { navigation } = useNavigation();
 
 async function handleSelect(key: string) {
-  await navigation(key);
+    await navigation(key);
 }
 </script>
-
-<template>
-  <Menu
-    :accordion="accordion"
-    :collapse="collapse"
-    :default-active="route.meta?.activePath || route.path"
-    :menus="menus"
-    :rounded="rounded"
-    :theme="theme"
-    mode="vertical"
-    @select="handleSelect"
-  />
-</template>

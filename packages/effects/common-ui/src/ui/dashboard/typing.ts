@@ -1,4 +1,4 @@
-import type { Component } from 'vue';
+import type { Component } from "vue";
 
 interface AnalysisOverviewItem {
   icon: Component | string;
@@ -40,9 +40,9 @@ interface WorkbenchQuickNavItem {
 }
 
 export type {
-  AnalysisOverviewItem,
-  WorkbenchProjectItem,
-  WorkbenchQuickNavItem,
-  WorkbenchTodoItem,
-  WorkbenchTrendItem,
+    AnalysisOverviewItem,
+    WorkbenchProjectItem,
+    WorkbenchQuickNavItem,
+    WorkbenchTodoItem,
+    WorkbenchTrendItem,
 };

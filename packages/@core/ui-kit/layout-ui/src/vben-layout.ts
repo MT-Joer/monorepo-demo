@@ -1,9 +1,9 @@
 import type {
-  ContentCompactType,
-  LayoutHeaderModeType,
-  LayoutType,
-  ThemeModeType,
-} from '@vben-core/typings';
+    ContentCompactType,
+    LayoutHeaderModeType,
+    LayoutType,
+    ThemeModeType,
+} from "@vben-core/typings";
 
 interface VbenLayoutProps {
   /**

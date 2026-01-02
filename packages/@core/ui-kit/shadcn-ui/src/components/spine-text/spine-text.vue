@@ -1,25 +1,25 @@
+<template>
+    <div class="vben-spine-text !bg-clip-text text-transparent" :style="style">
+        <slot></slot>
+    </div>
+</template>
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed } from "vue";
 
-const { animationDuration = 2, animationIterationCount = 'infinite' } =
+const { animationDuration = 2, animationIterationCount = "infinite" } =
   defineProps<{
     // 动画持续时间，单位秒
     animationDuration?: number;
     // 动画是否只执行一次
-    animationIterationCount?: 'infinite' | number;
+    animationIterationCount?: "infinite" | number;
   }>();
 
 const style = computed(() => {
-  return {
-    animation: `shine ${animationDuration}s linear ${animationIterationCount}`,
-  };
+    return {
+        animation: `shine ${animationDuration}s linear ${animationIterationCount}`,
+    };
 });
 </script>
-<template>
-  <div :style="style" class="vben-spine-text !bg-clip-text text-transparent">
-    <slot></slot>
-  </div>
-</template>
 <style>
 .vben-spine-text {
   background:

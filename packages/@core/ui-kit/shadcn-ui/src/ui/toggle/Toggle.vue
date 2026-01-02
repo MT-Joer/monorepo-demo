@@ -1,47 +1,45 @@
+<template>
+    <Toggle v-bind="forwarded"
+            :class="cn(toggleVariants({ variant, size }), props.class)">
+        <slot></slot>
+    </Toggle>
+</template>
+
 <script setup lang="ts">
-import type { ToggleEmits, ToggleProps } from 'reka-ui';
+import type { ToggleEmits, ToggleProps } from "reka-ui";
 
-import type { ToggleVariants } from './toggle';
+import type { ToggleVariants } from "./toggle";
 
-import { computed } from 'vue';
+import { computed } from "vue";
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from "@vben-core/shared/utils";
 
-import { Toggle, useForwardPropsEmits } from 'reka-ui';
+import { Toggle, useForwardPropsEmits } from "reka-ui";
 
-import { toggleVariants } from './toggle';
+import { toggleVariants } from "./toggle";
 
 const props = withDefaults(
-  defineProps<
+    defineProps<
     ToggleProps & {
       class?: any;
-      size?: ToggleVariants['size'];
-      variant?: ToggleVariants['variant'];
+      size?: ToggleVariants["size"];
+      variant?: ToggleVariants["variant"];
     }
   >(),
-  {
-    disabled: false,
-    size: 'default',
-    variant: 'default',
-  },
+    {
+        disabled: false,
+        size: "default",
+        variant: "default",
+    },
 );
 
 const emits = defineEmits<ToggleEmits>();
 
 const delegatedProps = computed(() => {
-  const { class: _, size: _size, variant: _variant, ...delegated } = props;
+    const { class: _, size: _size, variant: _variant, ...delegated } = props;
 
-  return delegated;
+    return delegated;
 });
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
-
-<template>
-  <Toggle
-    v-bind="forwarded"
-    :class="cn(toggleVariants({ variant, size }), props.class)"
-  >
-    <slot></slot>
-  </Toggle>
-</template>

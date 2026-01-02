@@ -1,14 +1,14 @@
 <template>
-  <span class="relative mr-1 flex size-1.5">
-    <span class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
-          :class="dotClass"
-          :style="dotStyle">
+    <span class="relative mr-1 flex size-1.5">
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
+              :class="dotClass"
+              :style="dotStyle">
+        </span>
+        <span class="relative inline-flex size-1.5 rounded-full"
+              :class="dotClass"
+              :style="dotStyle">
+        </span>
     </span>
-    <span class="relative inline-flex size-1.5 rounded-full"
-          :class="dotClass"
-          :style="dotStyle">
-    </span>
-  </span>
 </template>
 <script setup lang="ts">
 import type { CSSProperties } from "vue";
@@ -19,7 +19,7 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-	dotClass: "",
-	dotStyle: () => ({}),
+    dotClass: "",
+    dotStyle: () => ({}),
 });
 </script>

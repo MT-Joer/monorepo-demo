@@ -5,20 +5,20 @@
       "path": "apps/backend-mock"
     },
     {
-      "name": "@vben/playground",
-      "path": "apps/playground"
-    },
-    {
-      "name": "@vben/web-antd",
-      "path": "apps/web-antd"
-    },
-    {
       "name": "wechat-app-mall",
-      "path": "apps/wechat-app-mall-master"
+      "path": "apps/miniprogram/wechat-app-mall-master"
     },
     {
       "name": "wx-mall",
-      "path": "apps/wx-mall-master"
+      "path": "apps/miniprogram/wx-mall-master"
+    },
+    {
+      "name": "@vben/playground",
+      "path": "apps/web/playground"
+    },
+    {
+      "name": "@vben/web-antd",
+      "path": "apps/web/web-antd"
     },
     {
       "name": "@vben/docs",

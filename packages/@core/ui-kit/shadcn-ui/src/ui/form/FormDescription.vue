@@ -1,7 +1,14 @@
-<script lang="ts" setup>
-import { cn } from '@vben-core/shared/utils';
+<template>
+    <p :id="formDescriptionId"
+       :class="cn('text-sm text-muted-foreground', props.class)">
+        <slot></slot>
+    </p>
+</template>
 
-import { useFormField } from './useFormField';
+<script lang="ts" setup>
+import { cn } from "@vben-core/shared/utils";
+
+import { useFormField } from "./useFormField";
 
 const props = defineProps<{
   class?: any;
@@ -9,12 +16,3 @@ const props = defineProps<{
 
 const { formDescriptionId } = useFormField();
 </script>
-
-<template>
-  <p
-    :id="formDescriptionId"
-    :class="cn('text-sm text-muted-foreground', props.class)"
-  >
-    <slot></slot>
-  </p>
-</template>

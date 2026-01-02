@@ -1,6 +1,6 @@
-import dayjs from 'dayjs';
-import timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -8,40 +8,40 @@ dayjs.extend(timezone);
 type FormatDate = Date | dayjs.Dayjs | number | string;
 
 type Format =
-  | 'HH'
-  | 'HH:mm'
-  | 'HH:mm:ss'
-  | 'YYYY'
-  | 'YYYY-MM'
-  | 'YYYY-MM-DD'
-  | 'YYYY-MM-DD HH'
-  | 'YYYY-MM-DD HH:mm'
-  | 'YYYY-MM-DD HH:mm:ss'
+  | "HH"
+  | "HH:mm"
+  | "HH:mm:ss"
+  | "YYYY"
+  | "YYYY-MM"
+  | "YYYY-MM-DD"
+  | "YYYY-MM-DD HH"
+  | "YYYY-MM-DD HH:mm"
+  | "YYYY-MM-DD HH:mm:ss"
   | (string & {});
 
-export function formatDate(time?: FormatDate, format: Format = 'YYYY-MM-DD') {
-  try {
-    const date = dayjs.isDayjs(time) ? time : dayjs(time);
-    if (!date.isValid()) {
-      throw new Error('Invalid date');
+export function formatDate(time?: FormatDate, format: Format = "YYYY-MM-DD") {
+    try {
+        const date = dayjs.isDayjs(time) ? time : dayjs(time);
+        if (!date.isValid()) {
+            throw new Error("Invalid date");
+        }
+        return date.tz().format(format);
+    } catch (error) {
+        console.error(`Error formatting date: ${error}`);
+        return String(time ?? "");
     }
-    return date.tz().format(format);
-  } catch (error) {
-    console.error(`Error formatting date: ${error}`);
-    return String(time ?? '');
-  }
 }
 
 export function formatDateTime(time?: FormatDate) {
-  return formatDate(time, 'YYYY-MM-DD HH:mm:ss');
+    return formatDate(time, "YYYY-MM-DD HH:mm:ss");
 }
 
 export function isDate(value: any): value is Date {
-  return value instanceof Date;
+    return value instanceof Date;
 }
 
 export function isDayjsObject(value: any): value is dayjs.Dayjs {
-  return dayjs.isDayjs(value);
+    return dayjs.isDayjs(value);
 }
 
 /**
@@ -49,7 +49,7 @@ export function isDayjsObject(value: any): value is dayjs.Dayjs {
  * @returns 当前时区
  */
 export const getSystemTimezone = () => {
-  return dayjs.tz.guess();
+    return dayjs.tz.guess();
 };
 
 /**
@@ -62,8 +62,8 @@ let currentTimezone = getSystemTimezone();
  * @param timezone
  */
 export const setCurrentTimezone = (timezone?: string) => {
-  currentTimezone = timezone || getSystemTimezone();
-  dayjs.tz.setDefault(currentTimezone);
+    currentTimezone = timezone || getSystemTimezone();
+    dayjs.tz.setDefault(currentTimezone);
 };
 
 /**
@@ -71,5 +71,5 @@ export const setCurrentTimezone = (timezone?: string) => {
  * @returns 设置的时区
  */
 export const getCurrentTimezone = () => {
-  return currentTimezone;
+    return currentTimezone;
 };

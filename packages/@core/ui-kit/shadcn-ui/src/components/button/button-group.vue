@@ -1,32 +1,30 @@
+<template>
+    <div :class="
+             cn(
+                 'vben-button-group rounded-md',
+                 `size-${size}`,
+                 gap ? 'with-gap' : 'no-gap',
+                 $attrs.class as string,
+             )
+         "
+         :style="{ gap: gap ? `${gap}px` : '0px' }">
+        <slot></slot>
+    </div>
+</template>
 <script lang="ts" setup>
-import { cn } from '@vben-core/shared/utils';
+import { cn } from "@vben-core/shared/utils";
 
-defineOptions({ name: 'VbenButtonGroup' });
+defineOptions({ name: "VbenButtonGroup" });
 
 withDefaults(
-  defineProps<{
+    defineProps<{
     border?: boolean;
     gap?: number;
-    size?: 'large' | 'middle' | 'small';
+    size?: "large" | "middle" | "small";
   }>(),
-  { border: false, gap: 0, size: 'middle' },
+    { border: false, gap: 0, size: "middle" },
 );
 </script>
-<template>
-  <div
-    :class="
-      cn(
-        'vben-button-group rounded-md',
-        `size-${size}`,
-        gap ? 'with-gap' : 'no-gap',
-        $attrs.class as string,
-      )
-    "
-    :style="{ gap: gap ? `${gap}px` : '0px' }"
-  >
-    <slot></slot>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .vben-button-group {

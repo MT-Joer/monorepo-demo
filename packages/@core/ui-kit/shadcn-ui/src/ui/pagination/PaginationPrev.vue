@@ -1,35 +1,35 @@
+<template>
+    <PaginationPrev v-bind="delegatedProps">
+        <Button :class="cn('size-8 p-0', props.class)" variant="outline">
+            <slot>
+                <ChevronLeft class="size-4" />
+            </slot>
+        </Button>
+    </PaginationPrev>
+</template>
+
 <script setup lang="ts">
-import type { PaginationPrevProps } from 'reka-ui';
+import type { PaginationPrevProps } from "reka-ui";
 
-import { computed } from 'vue';
+import { computed } from "vue";
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from "@vben-core/shared/utils";
 
-import { ChevronLeft } from 'lucide-vue-next';
-import { PaginationPrev } from 'reka-ui';
+import { ChevronLeft } from "lucide-vue-next";
+import { PaginationPrev } from "reka-ui";
 
-import { Button } from '../button';
+import { Button } from "../button";
 
 const props = withDefaults(
-  defineProps<PaginationPrevProps & { class?: any }>(),
-  {
-    asChild: true,
-  },
+    defineProps<PaginationPrevProps & { class?: any }>(),
+    {
+        asChild: true,
+    },
 );
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+    const { class: _, ...delegated } = props;
 
-  return delegated;
+    return delegated;
 });
 </script>
-
-<template>
-  <PaginationPrev v-bind="delegatedProps">
-    <Button :class="cn('size-8 p-0', props.class)" variant="outline">
-      <slot>
-        <ChevronLeft class="size-4" />
-      </slot>
-    </Button>
-  </PaginationPrev>
-</template>

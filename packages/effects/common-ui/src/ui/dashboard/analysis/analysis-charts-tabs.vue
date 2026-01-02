@@ -1,40 +1,42 @@
+<template>
+    <div class="card-box w-full px-4 pb-5 pt-3">
+        <Tabs :default-value="defaultValue">
+            <TabsList>
+                <template v-for="tab in tabs" :key="tab.label">
+                    <TabsTrigger :value="tab.value">
+                        {{ tab.label }}
+                    </TabsTrigger>
+                </template>
+            </TabsList>
+            <template v-for="tab in tabs" :key="tab.label">
+                <TabsContent class="pt-4" :value="tab.value">
+                    <slot :name="tab.value"></slot>
+                </TabsContent>
+            </template>
+        </Tabs>
+    </div>
+</template>
+
 <script setup lang="ts">
-import type { TabOption } from '@vben/types';
+import type { TabOption } from "@vben/types";
 
-import { computed } from 'vue';
+import { computed } from "vue";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@vben-core/shadcn-ui';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@vben-core/shadcn-ui";
 
 interface Props {
   tabs?: TabOption[];
 }
 
 defineOptions({
-  name: 'AnalysisChartsTabs',
+    name: "AnalysisChartsTabs",
 });
 
 const props = withDefaults(defineProps<Props>(), {
-  tabs: () => [],
+    tabs: () => [],
 });
 
 const defaultValue = computed(() => {
-  return props.tabs?.[0]?.value;
+    return props.tabs?.[0]?.value;
 });
 </script>
-
-<template>
-  <div class="card-box w-full px-4 pb-5 pt-3">
-    <Tabs :default-value="defaultValue">
-      <TabsList>
-        <template v-for="tab in tabs" :key="tab.label">
-          <TabsTrigger :value="tab.value"> {{ tab.label }} </TabsTrigger>
-        </template>
-      </TabsList>
-      <template v-for="tab in tabs" :key="tab.label">
-        <TabsContent :value="tab.value" class="pt-4">
-          <slot :name="tab.value"></slot>
-        </TabsContent>
-      </template>
-    </Tabs>
-  </div>
-</template>

@@ -1,11 +1,16 @@
+<template>
+    <DropdownMenuSeparator v-bind="delegatedProps"
+                           :class="cn('-mx-1 my-1 h-px bg-border', props.class)" />
+</template>
+
 <script setup lang="ts">
-import type { DropdownMenuSeparatorProps } from 'reka-ui';
+import type { DropdownMenuSeparatorProps } from "reka-ui";
 
-import { computed } from 'vue';
+import { computed } from "vue";
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from "@vben-core/shared/utils";
 
-import { DropdownMenuSeparator } from 'reka-ui';
+import { DropdownMenuSeparator } from "reka-ui";
 
 const props = defineProps<
   DropdownMenuSeparatorProps & {
@@ -14,15 +19,8 @@ const props = defineProps<
 >();
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+    const { class: _, ...delegated } = props;
 
-  return delegated;
+    return delegated;
 });
 </script>
-
-<template>
-  <DropdownMenuSeparator
-    v-bind="delegatedProps"
-    :class="cn('-mx-1 my-1 h-px bg-border', props.class)"
-  />
-</template>

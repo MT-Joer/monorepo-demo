@@ -27,17 +27,11 @@
 		}
 	},
 	"dependencies": {
+				"eslint": "catalog:",
 		"eslint-config-turbo": "catalog:",
 		"eslint-plugin-command": "catalog:",
-		"eslint-plugin-import-x": "catalog:"
-	},
-	"devDependencies": {
-		"@eslint/js": "catalog:",
-		"@types/eslint": "catalog:",
-		"@typescript-eslint/eslint-plugin": "catalog:",
-		"@typescript-eslint/parser": "catalog:",
-		"eslint": "catalog:",
 		"eslint-plugin-eslint-comments": "catalog:",
+		"eslint-plugin-import-x": "catalog:",
 		"eslint-plugin-jsdoc": "catalog:",
 		"eslint-plugin-jsonc": "catalog:",
 		"eslint-plugin-n": "catalog:",
@@ -50,8 +44,14 @@
 		"eslint-plugin-vitest": "catalog:",
 		"eslint-plugin-vue": "catalog:",
 		"eslint-plugin-wxml": "catalog:",
-		"globals": "catalog:",
 		"jsonc-eslint-parser": "catalog:",
 		"vue-eslint-parser": "catalog:"
+	},
+	"devDependencies": {
+		"@eslint/js": "catalog:",
+		"@types/eslint": "catalog:",
+		"@typescript-eslint/eslint-plugin": "catalog:",
+		"@typescript-eslint/parser": "catalog:",
+		"globals": "catalog:"
 	}
 }

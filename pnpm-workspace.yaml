@@ -9,6 +9,9 @@ packages:
   - packages/effects/*
   - packages/business/*
   - apps/*
+  - apps/miniprogram/*
+  - apps/web/*
+  - apps/uniapp/*
   - scripts/*
   - docs
 

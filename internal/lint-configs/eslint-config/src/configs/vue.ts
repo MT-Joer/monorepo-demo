@@ -158,7 +158,7 @@ export async function vue(): Promise<Linter.Config[]> {
                 // 控制 Vue 模板中 HTML 标签的缩进
                 "vue/html-indent": [
                     "error",
-                    4, // 缩进空格数（与 Prettier 的 tabWidth 保持一致）
+                    4, // 缩进空格数
                     {
                         attribute: 1, // 属性换行后缩进 1 级（与标签名对齐）
                         baseIndent: 1, // 标签基础缩进

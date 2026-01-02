@@ -6,8 +6,7 @@
                       'text-blackA11 container select-none list-none rounded-lg text-sm font-medium',
                       $attrs.class as unknown as ClassType,
                       bordered ? 'border' : '',
-                  )
-              "
+                  ) "
               :default-expanded="defaultExpandedKeys as string[]"
               :disabled="disabled"
               :get-children="(item) => get(item, childrenField)"

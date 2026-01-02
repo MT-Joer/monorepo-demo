@@ -1,7 +1,22 @@
-<script setup lang="ts">
-import type { CSSProperties } from 'vue';
+<template>
+    <header class="top-0 flex w-full flex-[0_0_auto] items-center border-b border-border bg-header pl-2 transition-[margin-top] duration-200"
+            :class="theme"
+            :style="style">
+        <div v-if="slots.logo" :style="logoStyle">
+            <slot name="logo"></slot>
+        </div>
 
-import { computed, useSlots } from 'vue';
+        <slot name="toggle-button">
+        </slot>
+
+        <slot></slot>
+    </header>
+</template>
+
+<script setup lang="ts">
+import type { CSSProperties } from "vue";
+
+import { computed, useSlots } from "vue";
 
 interface Props {
   /**
@@ -43,35 +58,19 @@ const props = withDefaults(defineProps<Props>(), {});
 const slots = useSlots();
 
 const style = computed((): CSSProperties => {
-  const { fullWidth, height, show } = props;
-  const right = !show || !fullWidth ? undefined : 0;
+    const { fullWidth, height, show } = props;
+    const right = !show || !fullWidth ? undefined : 0;
 
-  return {
-    height: `${height}px`,
-    marginTop: show ? 0 : `-${height}px`,
-    right,
-  };
+    return {
+        height: `${height}px`,
+        marginTop: show ? 0 : `-${height}px`,
+        right,
+    };
 });
 
 const logoStyle = computed((): CSSProperties => {
-  return {
-    minWidth: `${props.isMobile ? 40 : props.sidebarWidth}px`,
-  };
+    return {
+        minWidth: `${props.isMobile ? 40 : props.sidebarWidth}px`,
+    };
 });
 </script>
-
-<template>
-  <header
-    :class="theme"
-    :style="style"
-    class="top-0 flex w-full flex-[0_0_auto] items-center border-b border-border bg-header pl-2 transition-[margin-top] duration-200"
-  >
-    <div v-if="slots.logo" :style="logoStyle">
-      <slot name="logo"></slot>
-    </div>
-
-    <slot name="toggle-button"> </slot>
-
-    <slot></slot>
-  </header>
-</template>

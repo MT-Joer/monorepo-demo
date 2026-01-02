@@ -1,6 +1,6 @@
-import type { Preferences } from './types';
+import type { Preferences } from "./types";
 
-import { preferencesManager } from './preferences';
+import { preferencesManager } from "./preferences";
 
 // 偏好设置（带有层级关系）
 const preferences: Preferences =
@@ -22,14 +22,14 @@ const initPreferences =
   preferencesManager.initPreferences.bind(preferencesManager);
 
 export {
-  clearPreferencesCache,
-  initPreferences,
-  preferences,
-  preferencesManager,
-  resetPreferences,
-  updatePreferences,
+    clearPreferencesCache,
+    initPreferences,
+    preferences,
+    preferencesManager,
+    resetPreferences,
+    updatePreferences,
 };
 
-export * from './constants';
-export type * from './types';
-export * from './use-preferences';
+export * from "./constants";
+export type * from "./types";
+export * from "./use-preferences";

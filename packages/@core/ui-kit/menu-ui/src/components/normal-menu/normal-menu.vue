@@ -1,22 +1,45 @@
+<template>
+    <ul class="relative"
+        :class="[
+            theme,
+            b(),
+            is('collapse', collapse),
+            is(theme, true),
+            is('rounded', rounded),
+        ]">
+        <template v-for="menu in menus" :key="menu.path">
+            <li :class="[e('item'), is('active', activePath === menu.path)]"
+                @click="() => emit('select', menu)"
+                @mouseenter="() => emit('enter', menu)">
+                <VbenIcon :class="e('icon')"
+                          fallback
+                          :icon="menuIcon(menu)" />
+
+                <span class="truncate" :class="e('name')"> {{ menu.name }}</span>
+            </li>
+        </template>
+    </ul>
+</template>
+
 <script setup lang="ts">
-import type { MenuRecordRaw } from '@vben-core/typings';
+import type { MenuRecordRaw } from "@vben-core/typings";
 
-import type { NormalMenuProps } from './normal-menu';
+import type { NormalMenuProps } from "./normal-menu";
 
-import { useNamespace } from '@vben-core/composables';
-import { VbenIcon } from '@vben-core/shadcn-ui';
+import { useNamespace } from "@vben-core/composables";
+import { VbenIcon } from "@vben-core/shadcn-ui";
 
 interface Props extends NormalMenuProps {}
 
 defineOptions({
-  name: 'NormalMenu',
+    name: "NormalMenu",
 });
 
 const props = withDefaults(defineProps<Props>(), {
-  activePath: '',
-  collapse: false,
-  menus: () => [],
-  theme: 'dark',
+    activePath: "",
+    collapse: false,
+    menus: () => [],
+    theme: "dark",
 });
 
 const emit = defineEmits<{
@@ -24,39 +47,14 @@ const emit = defineEmits<{
   select: [MenuRecordRaw];
 }>();
 
-const { b, e, is } = useNamespace('normal-menu');
+const { b, e, is } = useNamespace("normal-menu");
 
 function menuIcon(menu: MenuRecordRaw) {
-  return props.activePath === menu.path
-    ? menu.activeIcon || menu.icon
-    : menu.icon;
+    return props.activePath === menu.path
+        ? menu.activeIcon || menu.icon
+        : menu.icon;
 }
 </script>
-
-<template>
-  <ul
-    :class="[
-      theme,
-      b(),
-      is('collapse', collapse),
-      is(theme, true),
-      is('rounded', rounded),
-    ]"
-    class="relative"
-  >
-    <template v-for="menu in menus" :key="menu.path">
-      <li
-        :class="[e('item'), is('active', activePath === menu.path)]"
-        @click="() => emit('select', menu)"
-        @mouseenter="() => emit('enter', menu)"
-      >
-        <VbenIcon :class="e('icon')" :icon="menuIcon(menu)" fallback />
-
-        <span :class="e('name')" class="truncate"> {{ menu.name }}</span>
-      </li>
-    </template>
-  </ul>
-</template>
 <style lang="scss" scoped>
 $namespace: vben;
 

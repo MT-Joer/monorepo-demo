@@ -1,146 +1,146 @@
-import type { EChartsOption } from 'echarts';
+import type { EChartsOption } from "echarts";
 
-import type { Ref } from 'vue';
+import type { Ref } from "vue";
 
-import type { Nullable } from '@vben/types';
+import type { Nullable } from "@vben/types";
 
-import type EchartsUI from './echarts-ui.vue';
+import type EchartsUI from "./echarts-ui.vue";
 
-import { computed, nextTick, watch } from 'vue';
+import { computed, nextTick, watch } from "vue";
 
-import { usePreferences } from '@vben/preferences';
+import { usePreferences } from "@vben/preferences";
 
 import {
-  tryOnUnmounted,
-  useDebounceFn,
-  useResizeObserver,
-  useTimeoutFn,
-  useWindowSize,
-} from '@vueuse/core';
+    tryOnUnmounted,
+    useDebounceFn,
+    useResizeObserver,
+    useTimeoutFn,
+    useWindowSize,
+} from "@vueuse/core";
 
-import echarts from './echarts';
+import echarts from "./echarts";
 
 type EchartsUIType = typeof EchartsUI | undefined;
 
-type EchartsThemeType = 'dark' | 'light' | null;
+type EchartsThemeType = "dark" | "light" | null;
 
 function useEcharts(chartRef: Ref<EchartsUIType>) {
-  let chartInstance: echarts.ECharts | null = null;
-  let cacheOptions: EChartsOption = {};
+    let chartInstance: echarts.ECharts | null = null;
+    let cacheOptions: EChartsOption = {};
 
-  const { isDark } = usePreferences();
-  const { height, width } = useWindowSize();
-  const resizeHandler: () => void = useDebounceFn(resize, 200);
+    const { isDark } = usePreferences();
+    const { height, width } = useWindowSize();
+    const resizeHandler: () => void = useDebounceFn(resize, 200);
 
-  const getChartEl = (): HTMLElement | null => {
-    const refValue = chartRef?.value as unknown;
-    if (!refValue) return null;
-    if (refValue instanceof HTMLElement) {
-      return refValue;
-    }
-    const maybeComponent = refValue as { $el?: HTMLElement };
-    return maybeComponent.$el ?? null;
-  };
-
-  const isElHidden = (el: HTMLElement | null): boolean => {
-    if (!el) return true;
-    return el.offsetHeight === 0 || el.offsetWidth === 0;
-  };
-
-  const getOptions = computed((): EChartsOption => {
-    if (!isDark.value) {
-      return {};
-    }
-
-    return {
-      backgroundColor: 'transparent',
+    const getChartEl = (): HTMLElement | null => {
+        const refValue = chartRef?.value as unknown;
+        if (!refValue) return null;
+        if (refValue instanceof HTMLElement) {
+            return refValue;
+        }
+        const maybeComponent = refValue as { $el?: HTMLElement };
+        return maybeComponent.$el ?? null;
     };
-  });
 
-  const initCharts = (t?: EchartsThemeType) => {
-    const el = chartRef?.value?.$el;
-    if (!el) {
-      return;
-    }
-    chartInstance = echarts.init(el, t || isDark.value ? 'dark' : null);
-
-    return chartInstance;
-  };
-
-  const renderEcharts = (
-    options: EChartsOption,
-    clear = true,
-  ): Promise<Nullable<echarts.ECharts>> => {
-    cacheOptions = options;
-    const currentOptions = {
-      ...options,
-      ...getOptions.value,
+    const isElHidden = (el: HTMLElement | null): boolean => {
+        if (!el) return true;
+        return el.offsetHeight === 0 || el.offsetWidth === 0;
     };
-    return new Promise((resolve) => {
-      if (chartRef.value?.offsetHeight === 0) {
-        useTimeoutFn(async () => {
-          resolve(await renderEcharts(currentOptions));
-        }, 30);
-        return;
-      }
-      nextTick(() => {
+
+    const getOptions = computed((): EChartsOption => {
+        if (!isDark.value) {
+            return {};
+        }
+
+        return {
+            backgroundColor: "transparent",
+        };
+    });
+
+    const initCharts = (t?: EchartsThemeType) => {
+        const el = chartRef?.value?.$el;
+        if (!el) {
+            return;
+        }
+        chartInstance = echarts.init(el, t || isDark.value ? "dark" : null);
+
+        return chartInstance;
+    };
+
+    const renderEcharts = (
+        options: EChartsOption,
+        clear = true,
+    ): Promise<Nullable<echarts.ECharts>> => {
+        cacheOptions = options;
+        const currentOptions = {
+            ...options,
+            ...getOptions.value,
+        };
+        return new Promise((resolve) => {
+            if (chartRef.value?.offsetHeight === 0) {
+                useTimeoutFn(async () => {
+                    resolve(await renderEcharts(currentOptions));
+                }, 30);
+                return;
+            }
+            nextTick(() => {
+                const el = getChartEl();
+                if (isElHidden(el)) {
+                    useTimeoutFn(async () => {
+                        resolve(await renderEcharts(currentOptions));
+                    }, 30);
+                    return;
+                }
+                useTimeoutFn(() => {
+                    if (!chartInstance) {
+                        const instance = initCharts();
+                        if (!instance) return;
+                    }
+                    clear && chartInstance?.clear();
+                    chartInstance?.setOption(currentOptions);
+                    resolve(chartInstance);
+                }, 30);
+            });
+        });
+    };
+
+    function resize() {
         const el = getChartEl();
         if (isElHidden(el)) {
-          useTimeoutFn(async () => {
-            resolve(await renderEcharts(currentOptions));
-          }, 30);
-          return;
+            return;
         }
-        useTimeoutFn(() => {
-          if (!chartInstance) {
-            const instance = initCharts();
-            if (!instance) return;
-          }
-          clear && chartInstance?.clear();
-          chartInstance?.setOption(currentOptions);
-          resolve(chartInstance);
-        }, 30);
-      });
-    });
-  };
-
-  function resize() {
-    const el = getChartEl();
-    if (isElHidden(el)) {
-      return;
+        chartInstance?.resize({
+            animation: {
+                duration: 300,
+                easing: "quadraticIn",
+            },
+        });
     }
-    chartInstance?.resize({
-      animation: {
-        duration: 300,
-        easing: 'quadraticIn',
-      },
+
+    watch([ width, height ], () => {
+        resizeHandler?.();
     });
-  }
 
-  watch([width, height], () => {
-    resizeHandler?.();
-  });
+    useResizeObserver(chartRef as never, resizeHandler);
 
-  useResizeObserver(chartRef as never, resizeHandler);
+    watch(isDark, () => {
+        if (chartInstance) {
+            chartInstance.dispose();
+            initCharts();
+            renderEcharts(cacheOptions);
+            resize();
+        }
+    });
 
-  watch(isDark, () => {
-    if (chartInstance) {
-      chartInstance.dispose();
-      initCharts();
-      renderEcharts(cacheOptions);
-      resize();
-    }
-  });
-
-  tryOnUnmounted(() => {
+    tryOnUnmounted(() => {
     // 销毁实例，释放资源
-    chartInstance?.dispose();
-  });
-  return {
-    renderEcharts,
-    resize,
-    getChartInstance: () => chartInstance,
-  };
+        chartInstance?.dispose();
+    });
+    return {
+        renderEcharts,
+        resize,
+        getChartInstance: () => chartInstance,
+    };
 }
 
 export { useEcharts };

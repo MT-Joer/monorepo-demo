@@ -1,11 +1,36 @@
+<template>
+    <ScrollArea class="vben-scrollbar relative"
+                :class="[cn(props.class), computedShadowClasses]"
+                :on-scroll="handleScroll">
+        <div v-if="showShadowTop"
+             class="scrollbar-top-shadow pointer-events-none absolute top-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
+             :class="{
+                 'opacity-100': !isAtTop,
+                 'border-t border-border': shadowBorder && !isAtTop,
+             }">
+        </div>
+        <slot></slot>
+        <div v-if="showShadowBottom"
+             class="scrollbar-bottom-shadow pointer-events-none absolute bottom-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
+             :class="{
+                 'opacity-100': !isAtTop && !isAtBottom,
+                 'border-b border-border': shadowBorder && !isAtTop && !isAtBottom,
+             }">
+        </div>
+        <ScrollBar v-if="horizontal"
+                   :class="scrollBarClass"
+                   orientation="horizontal" />
+    </ScrollArea>
+</template>
+
 <script setup lang="ts">
-import type { ClassType } from '@vben-core/typings';
+import type { ClassType } from "@vben-core/typings";
 
-import { computed, ref } from 'vue';
+import { computed, ref } from "vue";
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from "@vben-core/shared/utils";
 
-import { ScrollArea, ScrollBar } from '../../ui';
+import { ScrollArea, ScrollBar } from "../../ui";
 
 interface Props {
   class?: ClassType;
@@ -20,14 +45,14 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  class: '',
-  horizontal: false,
-  shadow: false,
-  shadowBorder: false,
-  shadowBottom: true,
-  shadowLeft: false,
-  shadowRight: false,
-  shadowTop: true,
+    class: "",
+    horizontal: false,
+    shadow: false,
+    shadowBorder: false,
+    shadowBottom: true,
+    shadowLeft: false,
+    shadowRight: false,
+    shadowTop: true,
 });
 
 const emit = defineEmits<{
@@ -53,73 +78,42 @@ const showShadowLeft = computed(() => props.shadow && props.shadowLeft);
 const showShadowRight = computed(() => props.shadow && props.shadowRight);
 
 const computedShadowClasses = computed(() => {
-  return {
-    'both-shadow':
+    return {
+        "both-shadow":
       !isAtLeft.value &&
       !isAtRight.value &&
       showShadowLeft.value &&
       showShadowRight.value,
-    'left-shadow': !isAtLeft.value && showShadowLeft.value,
-    'right-shadow': !isAtRight.value && showShadowRight.value,
-  };
+        "left-shadow": !isAtLeft.value && showShadowLeft.value,
+        "right-shadow": !isAtRight.value && showShadowRight.value,
+    };
 });
 
 function handleScroll(event: Event) {
-  const target = event.target as HTMLElement;
-  const scrollTop = target?.scrollTop ?? 0;
-  const scrollLeft = target?.scrollLeft ?? 0;
-  const clientHeight = target?.clientHeight ?? 0;
-  const clientWidth = target?.clientWidth ?? 0;
-  const scrollHeight = target?.scrollHeight ?? 0;
-  const scrollWidth = target?.scrollWidth ?? 0;
-  isAtTop.value = scrollTop <= 0;
-  isAtLeft.value = scrollLeft <= 0;
-  isAtBottom.value =
+    const target = event.target as HTMLElement;
+    const scrollTop = target?.scrollTop ?? 0;
+    const scrollLeft = target?.scrollLeft ?? 0;
+    const clientHeight = target?.clientHeight ?? 0;
+    const clientWidth = target?.clientWidth ?? 0;
+    const scrollHeight = target?.scrollHeight ?? 0;
+    const scrollWidth = target?.scrollWidth ?? 0;
+    isAtTop.value = scrollTop <= 0;
+    isAtLeft.value = scrollLeft <= 0;
+    isAtBottom.value =
     Math.abs(scrollTop) + clientHeight >=
     scrollHeight - ARRIVED_STATE_THRESHOLD_PIXELS;
-  isAtRight.value =
+    isAtRight.value =
     Math.abs(scrollLeft) + clientWidth >=
     scrollWidth - ARRIVED_STATE_THRESHOLD_PIXELS;
 
-  emit('scrollAt', {
-    bottom: isAtBottom.value,
-    left: isAtLeft.value,
-    right: isAtRight.value,
-    top: isAtTop.value,
-  });
+    emit("scrollAt", {
+        bottom: isAtBottom.value,
+        left: isAtLeft.value,
+        right: isAtRight.value,
+        top: isAtTop.value,
+    });
 }
 </script>
-
-<template>
-  <ScrollArea
-    :class="[cn(props.class), computedShadowClasses]"
-    :on-scroll="handleScroll"
-    class="vben-scrollbar relative"
-  >
-    <div
-      v-if="showShadowTop"
-      :class="{
-        'opacity-100': !isAtTop,
-        'border-t border-border': shadowBorder && !isAtTop,
-      }"
-      class="scrollbar-top-shadow pointer-events-none absolute top-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
-    ></div>
-    <slot></slot>
-    <div
-      v-if="showShadowBottom"
-      :class="{
-        'opacity-100': !isAtTop && !isAtBottom,
-        'border-b border-border': shadowBorder && !isAtTop && !isAtBottom,
-      }"
-      class="scrollbar-bottom-shadow pointer-events-none absolute bottom-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
-    ></div>
-    <ScrollBar
-      v-if="horizontal"
-      :class="scrollBarClass"
-      orientation="horizontal"
-    />
-  </ScrollArea>
-</template>
 
 <style scoped>
 .vben-scrollbar {

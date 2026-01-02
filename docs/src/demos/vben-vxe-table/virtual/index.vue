@@ -1,9 +1,15 @@
+<template>
+    <div class="vp-raw h-[500px] w-full">
+        <Grid />
+    </div>
+</template>
+
 <script lang="ts" setup>
-import type { VxeGridProps } from '#/adapter/vxe-table';
+import type { VxeGridProps } from "#/adapter/vxe-table";
 
-import { onMounted } from 'vue';
+import { onMounted } from "vue";
 
-import { useVbenVxeGrid } from '#/adapter/vxe-table';
+import { useVbenVxeGrid } from "#/adapter/vxe-table";
 
 interface RowType {
   id: number;
@@ -13,52 +19,46 @@ interface RowType {
 }
 
 const gridOptions: VxeGridProps<RowType> = {
-  columns: [
-    { type: 'seq', width: 70 },
-    { field: 'name', title: 'Name' },
-    { field: 'role', title: 'Role' },
-    { field: 'sex', title: 'Sex' },
-  ],
-  data: [],
-  height: 'auto',
-  pagerConfig: {
-    enabled: false,
-  },
-  scrollY: {
-    enabled: true,
-    gt: 0,
-  },
-  showOverflow: true,
+    columns: [
+        { type: "seq", width: 70 },
+        { field: "name", title: "Name" },
+        { field: "role", title: "Role" },
+        { field: "sex", title: "Sex" },
+    ],
+    data: [],
+    height: "auto",
+    pagerConfig: {
+        enabled: false,
+    },
+    scrollY: {
+        enabled: true,
+        gt: 0,
+    },
+    showOverflow: true,
 };
 
-const [Grid, gridApi] = useVbenVxeGrid({ gridOptions });
+const [ Grid, gridApi ] = useVbenVxeGrid({ gridOptions });
 
 // 模拟行数据
 const loadList = (size = 200) => {
-  try {
-    const dataList: RowType[] = [];
-    for (let i = 0; i < size; i++) {
-      dataList.push({
-        id: 10_000 + i,
-        name: `Test${i}`,
-        role: 'Developer',
-        sex: '男',
-      });
-    }
-    gridApi.setGridOptions({ data: dataList });
-  } catch (error) {
-    console.error('Failed to load data:', error);
+    try {
+        const dataList: RowType[] = [];
+        for (let i = 0; i < size; i++) {
+            dataList.push({
+                id: 10_000 + i,
+                name: `Test${i}`,
+                role: "Developer",
+                sex: "男",
+            });
+        }
+        gridApi.setGridOptions({ data: dataList });
+    } catch (error) {
+        console.error("Failed to load data:", error);
     // Implement user-friendly error handling
-  }
+    }
 };
 
 onMounted(() => {
-  loadList(1000);
+    loadList(1000);
 });
 </script>
-
-<template>
-  <div class="vp-raw h-[500px] w-full">
-    <Grid />
-  </div>
-</template>

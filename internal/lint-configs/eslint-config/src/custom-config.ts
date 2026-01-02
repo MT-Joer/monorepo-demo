@@ -14,6 +14,7 @@ const restrictedImportIgnores = [
     "**/vite.config.mts",
     "**/tailwind.config.mjs",
     "**/postcss.config.mjs",
+    "**/miniprogram_npm/**",
 ];
 
 const customConfig: Linter.Config[] = [
@@ -157,6 +158,67 @@ const customConfig: Linter.Config[] = [
             "n/prefer-global/process": "off",
             "no-console": "off",
             "unicorn/prefer-module": "off",
+        },
+    },
+    // 小程序目录允许使用 module.exports 及其他 legacy 语法
+    {
+        files: [ "apps/**/miniprogram/**/**" ],
+        rules: {
+            // CommonJS 相关
+            "unicorn/prefer-module": "off",
+            "import/first": "off",
+            "import/newline-after-import": "off",
+            "perfectionist/sort-imports": "off",
+
+            // 变量声明相关（var 在小程序中广泛使用）
+            "no-var": "off",
+            "vars-on-top": "off",
+            "block-scoped-var": "off",
+            "prefer-const": "off",
+
+            // 函数相关
+            "prefer-rest-params": "off",
+            "unicorn/no-array-reduce": "off",
+            "unicorn/no-array-callback-reference": "off",
+            "unicorn/no-nested-ternary": "off",
+
+            // 访问相关
+            "no-prototype-builtins": "off",
+            "no-use-before-define": "off",
+
+            // 正则表达式（性能）
+            "regexp/no-super-linear-backtracking": "off",
+            "regexp/optimal-quantifier-concatenation": "off",
+            "regexp/no-dupe-disjunctions": "off",
+            "regexp/no-empty-capturing-group": "off",
+            "regexp/no-empty-group": "off",
+            "regexp/no-obscure-range": "off",
+            "regexp/no-useless-assertions": "off",
+            "regexp/no-contradiction-with-assertion": "off",
+            "regexp/no-misleading-capturing-group": "off",
+            "regexp/no-legacy-features": "off",
+
+            // 其他
+            "no-useless-escape": "off",
+            "no-throw-literal": "off",
+            "unicorn/no-this-assignment": "off",
+            "eslint-comments/no-unlimited-disable": "off",
+            "array-callback-return": "off",
+            "unicorn/prefer-string-slice": "off",
+            "@typescript-eslint/no-dynamic-delete": "off",
+            "unicorn/no-instanceof-builtins": "off",
+            "unicorn/prefer-code-point": "off",
+            "unicorn/prefer-structured-clone": "off",
+            "prefer-regex-literals": "off",
+            "no-cond-assign": "off",
+            "no-global-assign": "off",
+            "no-alert": "off",
+            "no-self-assign": "off",
+            "no-empty": "off",
+            "unicorn/prefer-number-properties": "off",
+            "unicorn/no-array-method-this-argument": "off",
+            "unicorn/no-for-loop": "off",
+            "unicorn/prefer-default-parameters": "off"
         },
     },
     {

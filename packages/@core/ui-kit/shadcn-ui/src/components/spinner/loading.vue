@@ -1,7 +1,34 @@
-<script lang="ts" setup>
-import { ref, watch } from 'vue';
+<template>
+    <div :class="
+             cn(
+                 'absolute left-0 top-0 z-100 flex size-full flex-col items-center justify-center bg-overlay-content transition-all duration-500 dark:bg-overlay',
+                 {
+                     'invisible opacity-0': !showSpinner,
+                 },
+                 props.class,
+             )
+         "
+         @transitionend="onTransitionEnd">
+        <slot v-if="renderSpinner" name="icon">
+            <span class="dot relative inline-block size-9 text-3xl">
+                <i v-for="index in 4"
+                   :key="index"
+                   class="absolute block size-4 origin-[50%_50%] scale-75 rounded-full bg-primary opacity-30">
+                </i>
+            </span>
+        </slot>
 
-import { cn } from '@vben-core/shared/utils';
+        <div v-if="text" class="mt-4 text-xs text-primary">
+            {{ text }}
+        </div>
+        <slot></slot>
+    </div>
+</template>
+
+<script lang="ts" setup>
+import { ref, watch } from "vue";
+
+import { cn } from "@vben-core/shared/utils";
 
 interface Props {
   class?: string;
@@ -22,12 +49,12 @@ interface Props {
 }
 
 defineOptions({
-  name: 'VbenLoading',
+    name: "VbenLoading",
 });
 
 const props = withDefaults(defineProps<Props>(), {
-  minLoadingTime: 50,
-  text: '',
+    minLoadingTime: 50,
+    text: "",
 });
 // const startTime = ref(0);
 const showSpinner = ref(false);
@@ -35,63 +62,35 @@ const renderSpinner = ref(false);
 const timer = ref<ReturnType<typeof setTimeout>>();
 
 watch(
-  () => props.spinning,
-  (show) => {
-    if (!show) {
-      showSpinner.value = false;
-      clearTimeout(timer.value);
-      return;
-    }
+    () => props.spinning,
+    (show) => {
+        if (!show) {
+            showSpinner.value = false;
+            clearTimeout(timer.value);
+            return;
+        }
 
-    // startTime.value = performance.now();
-    timer.value = setTimeout(() => {
-      // const loadingTime = performance.now() - startTime.value;
+        // startTime.value = performance.now();
+        timer.value = setTimeout(() => {
+            // const loadingTime = performance.now() - startTime.value;
 
-      showSpinner.value = true;
-      if (showSpinner.value) {
-        renderSpinner.value = true;
-      }
-    }, props.minLoadingTime);
-  },
-  {
-    immediate: true,
-  },
+            showSpinner.value = true;
+            if (showSpinner.value) {
+                renderSpinner.value = true;
+            }
+        }, props.minLoadingTime);
+    },
+    {
+        immediate: true,
+    },
 );
 
 function onTransitionEnd() {
-  if (!showSpinner.value) {
-    renderSpinner.value = false;
-  }
+    if (!showSpinner.value) {
+        renderSpinner.value = false;
+    }
 }
 </script>
-
-<template>
-  <div
-    :class="
-      cn(
-        'absolute left-0 top-0 z-100 flex size-full flex-col items-center justify-center bg-overlay-content transition-all duration-500 dark:bg-overlay',
-        {
-          'invisible opacity-0': !showSpinner,
-        },
-        props.class,
-      )
-    "
-    @transitionend="onTransitionEnd"
-  >
-    <slot name="icon" v-if="renderSpinner">
-      <span class="dot relative inline-block size-9 text-3xl">
-        <i
-          v-for="index in 4"
-          :key="index"
-          class="absolute block size-4 origin-[50%_50%] scale-75 rounded-full bg-primary opacity-30"
-        ></i>
-      </span>
-    </slot>
-
-    <div v-if="text" class="mt-4 text-xs text-primary">{{ text }}</div>
-    <slot></slot>
-  </div>
-</template>
 
 <style scoped>
 .dot {
