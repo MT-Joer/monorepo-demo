@@ -20,7 +20,7 @@ export async function jsonc(): Promise<Linter.Config[]> {
 
 	return [
 		{
-			files: ['**/*.json', '**/*.json5', '**/*.jsonc', '*.code-workspace'],
+			files: ['*.json', '**/*.json5', '**/*.jsonc', '*.code-workspace'],
 			languageOptions: {
 				parser: parserJsonc as any,
 			},
@@ -147,7 +147,14 @@ function sortTsconfig(): Linter.Config {
 			'jsonc/sort-keys': [
 				'error',
 				{
-					order: ['extends', 'compilerOptions', 'references', 'files', 'include', 'exclude'],
+					order: [
+						'extends',
+						'compilerOptions',
+						'references',
+						'files',
+						'include',
+						'exclude',
+					],
 					pathPattern: '^$',
 				},
 				{

@@ -7,21 +7,23 @@
   - 在此处仅启用插件与规则，具体格式由仓库根/包级 prettier 配置控制
 */
 
-import type { Linter } from 'eslint';
+import type { Linter } from "eslint";
 
-import { interopDefault } from '../util';
+import { interopDefault } from "../util";
 
 export async function prettier(): Promise<Linter.Config[]> {
-	const [pluginPrettier] = await Promise.all([interopDefault(import('eslint-plugin-prettier'))] as const);
-	return [
-		{
-			plugins: {
-				prettier: pluginPrettier,
-			},
-			rules: {
-				// 由 Prettier 统一负责格式，报告为 error 以在 CI 中强制通过格式检查
-				'prettier/prettier': 'error',
-			},
-		},
-	];
+    const [ pluginPrettier ] = await Promise.all([
+        interopDefault(import("eslint-plugin-prettier")),
+    ] as const);
+    return [
+        {
+            plugins: {
+                prettier: pluginPrettier,
+            },
+            rules: {
+                // 由 Prettier 统一负责格式，报告为 error 以在 CI 中强制通过格式检查
+                "prettier/prettier": "error",
+            },
+        },
+    ];
 }

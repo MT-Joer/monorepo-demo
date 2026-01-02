@@ -6,8 +6,8 @@
     "dbaeumer.vscode-eslint",
     // Visual Studio Code 的官方 Stylelint 扩展
     "stylelint.vscode-stylelint",
-    // 使用 Prettier 的代码格式化程序
-    "esbenp.prettier-vscode",
+    // // 使用 Prettier 的代码格式化程序
+    // "esbenp.prettier-vscode",
     // 支持 dotenv 文件语法
     "mikestead.dotenv",
     // 源代码的拼写检查器
