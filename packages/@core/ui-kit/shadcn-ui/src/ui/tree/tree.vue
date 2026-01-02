@@ -20,17 +20,25 @@
               @update:model-value="updateModelValue">
         <div v-if="$slots.header"
              :class="
-                 cn('my-0.5 flex w-full items-center p-1', bordered ? 'border-b' : '')
+                 cn(
+                     'my-0.5 flex w-full items-center p-1',
+                     bordered ? 'border-b' : '',
+                 )
              ">
             <slot name="header">
             </slot>
         </div>
         <div v-if="treeData.length > 0"
              :class="
-                 cn('my-0.5 flex w-full items-center p-1', bordered ? 'border-b' : '')
+                 cn(
+                     'my-0.5 flex w-full items-center p-1',
+                     bordered ? 'border-b' : '',
+                 )
              ">
             <div class="flex size-5 flex-1 cursor-pointer items-center"
-                 @click="() => (expanded?.length > 0 ? collapseAll() : expandAll())">
+                 @click="
+                     () => (expanded?.length > 0 ? collapseAll() : expandAll())
+                 ">
                 <ChevronRight class="size-4 cursor-pointer text-foreground/80 transition hover:text-foreground"
                               :class="{ 'rotate-90': expanded?.length > 0 }" />
                 <Checkbox v-if="multiple"
@@ -53,7 +61,9 @@
                       }"
                       v-bind="
                           Object.assign(item.bind, {
-                              onfocus: isNodeDisabled(item) ? 'this.blur()' : undefined,
+                              onfocus: isNodeDisabled(item)
+                                  ? 'this.blur()'
+                                  : undefined,
                               disabled: isNodeDisabled(item),
                           })
                       "
@@ -61,7 +71,8 @@
                       :class="
                           cn('cursor-pointer', getNodeClass?.(item), {
                               'data-[selected]:bg-accent': !multiple,
-                              'cursor-not-allowed text-foreground/50': isNodeDisabled(item),
+                              'cursor-not-allowed text-foreground/50':
+                                  isNodeDisabled(item),
                           })
                       "
                       :style="{ 'margin-left': `${item.level - 1}rem` }"
@@ -103,7 +114,9 @@
                 <div class="flex items-center gap-1">
                     <Checkbox v-if="multiple"
                               :disabled="isNodeDisabled(item)"
-                              :indeterminate="isIndeterminate && !isNodeDisabled(item)"
+                              :indeterminate="
+                                  isIndeterminate && !isNodeDisabled(item)
+                              "
                               :model-value="isSelected && !isNodeDisabled(item)"
                               @click="
                                   (event: MouseEvent) => {
@@ -139,7 +152,10 @@
         </TransitionGroup>
         <div v-if="$slots.footer"
              :class="
-                 cn('my-0.5 flex w-full items-center p-1', bordered ? 'border-t' : '')
+                 cn(
+                     'my-0.5 flex w-full items-center p-1',
+                     bordered ? 'border-t' : '',
+                 )
              ">
             <slot name="footer">
             </slot>
@@ -167,17 +183,17 @@ import { treePropsDefaults } from "./types";
 const props = withDefaults(defineProps<TreeProps>(), treePropsDefaults());
 
 const emits = defineEmits<{
-  expand: [value: FlattenedItem<Recordable<any>>];
-  select: [value: FlattenedItem<Recordable<any>>];
+	expand: [value: FlattenedItem<Recordable<any>>];
+	select: [value: FlattenedItem<Recordable<any>>];
 }>();
 
 interface InnerFlattenItem<T = Recordable<any>, P = number | string> {
-  hasChildren: boolean;
-  id: P;
-  level: number;
-  parentId: null | P;
-  parents: P[];
-  value: T;
+	hasChildren: boolean;
+	id: P;
+	level: number;
+	parentId: null | P;
+	parents: P[];
+	value: T;
 }
 
 function flatten<T = Recordable<any>, P = number | string>(
@@ -202,7 +218,10 @@ function flatten<T = Recordable<any>, P = number | string>(
         result.push(val);
         if (val.hasChildren)
             result.push(
-                ...flatten(children, childrenField, level + 1, id, [ ...parents, id ]),
+                ...flatten(children, childrenField, level + 1, id, [
+                    ...parents,
+                    id,
+                ]),
             );
     });
     return result;
@@ -220,7 +239,7 @@ onMounted(() => {
         updateTreeValue();
         if (
             props.defaultExpandedLevel !== undefined &&
-      props.defaultExpandedLevel > 0
+			props.defaultExpandedLevel > 0
         )
             expandToLevel(props.defaultExpandedLevel);
     });
@@ -338,33 +357,38 @@ function onSelect(item: FlattenedItem<Recordable<any>>, isSelected: boolean) {
 
     if (
         !props.checkStrictly &&
-    props.multiple &&
-    props.autoCheckParent &&
-    isSelected
+		props.multiple &&
+		props.autoCheckParent &&
+		isSelected
     ) {
         flattenData.value
             .find((i) => {
                 return (
-                    get(i.value, props.valueField) === get(item.value, props.valueField)
+                    get(i.value, props.valueField) ===
+					get(item.value, props.valueField)
                 );
             })
             ?.parents?.filter((item) => !get(item, props.disabledField))
             ?.forEach((p) => {
-                if (Array.isArray(modelValue.value) && !modelValue.value.includes(p)) {
+                if (
+                    Array.isArray(modelValue.value) &&
+					!modelValue.value.includes(p)
+                ) {
                     modelValue.value.push(p);
                 }
             });
     }
     if (
         !props.checkStrictly &&
-    props.multiple &&
-    props.autoCheckParent &&
-    !isSelected
+		props.multiple &&
+		props.autoCheckParent &&
+		!isSelected
     ) {
         flattenData.value
             .find((i) => {
                 return (
-                    get(i.value, props.valueField) === get(item.value, props.valueField)
+                    get(i.value, props.valueField) ===
+					get(item.value, props.valueField)
                 );
             })
             ?.parents?.filter((item) => !get(item, props.disabledField))
@@ -373,9 +397,9 @@ function onSelect(item: FlattenedItem<Recordable<any>>, isSelected: boolean) {
                 const children = flattenData.value.filter((i) => {
                     return (
                         i.parents.length > 0 &&
-            i.parents.includes(p) &&
-            i.id !== item._id &&
-            i.parentId === p
+						i.parents.includes(p) &&
+						i.id !== item._id &&
+						i.parentId === p
                     );
                 });
                 if (Array.isArray(modelValue.value)) {
@@ -410,36 +434,36 @@ defineExpose({
 </script>
 <style lang="scss" scoped>
 .container {
-  position: relative;
-  padding: 0;
-  list-style-type: none;
+	position: relative;
+	padding: 0;
+	list-style-type: none;
 }
 
 .item {
-  box-sizing: border-box;
-  width: 100%;
-  height: 30px;
-  background-color: #f3f3f3;
-  border: 1px solid #666;
+	box-sizing: border-box;
+	width: 100%;
+	height: 30px;
+	background-color: #f3f3f3;
+	border: 1px solid #666;
 }
 
 /* 1. 声明过渡效果 */
 .fade-move,
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+	transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
 /* 2. 声明进入和离开的状态 */
 .fade-enter-from,
 .fade-leave-to {
-  opacity: 0;
-  transform: scaleY(0.01) translate(30px, 0);
+	opacity: 0;
+	transform: scaleY(0.01) translate(30px, 0);
 }
 
 /* 3. 确保离开的项目被移除出了布局流
       以便正确地计算移动时的动画效果。 */
 .fade-leave-active {
-  position: absolute;
+	position: absolute;
 }
 </style>
