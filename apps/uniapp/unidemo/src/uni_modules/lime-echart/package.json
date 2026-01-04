@@ -10,9 +10,6 @@
     "可视化"
 ],
   "repository": "https://gitee.com/liangei/lime-echart",
-  "engines": {
-    "HBuilderX": "^3.6.4"
-  },
   "dcloudext": {
     "sale": {
       "regular": {
@@ -87,5 +84,8 @@
   "dependencies": {
     "echarts": "^5.4.1",
     "zrender": "^5.4.3"
+  },
+  "engines": {
+    "HBuilderX": "^3.6.4"
   }
 }

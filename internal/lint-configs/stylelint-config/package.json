@@ -11,15 +11,18 @@
   },
   "license": "MIT",
   "type": "module",
+  "scripts": {
+		"stub": "pnpm unbuild --stub"
+	},
   "files": [
     "dist"
   ],
-  "main": "./index.mjs",
-  "module": "./index.mjs",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "default": "./index.mjs"
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
     }
   },
   "dependencies": {

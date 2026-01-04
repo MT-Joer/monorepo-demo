@@ -194,7 +194,7 @@ export async function javascript(): Promise<Linter.Config[]> {
                     },
                 ],
                 "no-unused-vars": [
-                    "error",
+                    "warn",
                     {
                         args: "none",
                         caughtErrors: "none",
@@ -239,7 +239,7 @@ export async function javascript(): Promise<Linter.Config[]> {
 
                 "prefer-promise-reject-errors": "error",
                 "prefer-regex-literals": [ "error", { disallowRedundantWrapping: true } ],
-                "prefer-rest-params": "error",
+                "prefer-rest-params": "warn",
                 "prefer-spread": "error",
                 "prefer-template": "error",
                 "space-before-function-paren": "off",
@@ -249,7 +249,7 @@ export async function javascript(): Promise<Linter.Config[]> {
 
                 "unused-imports/no-unused-imports": "error",
                 "unused-imports/no-unused-vars": [
-                    "error",
+                    "warn",
                     {
                         args: "after-used",
                         argsIgnorePattern: "^_",

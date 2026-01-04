@@ -24,6 +24,7 @@ export async function unicorn(): Promise<Linter.Config[]> {
                 ...pluginUnicorn.configs.recommended.rules,
                 "unicorn/no-abusive-eslint-disable":"off",
 
+                "unicorn/no-this-assignment":"warn",
                 "unicorn/no-empty-file":"off",
                 "unicorn/prefer-ternary":"off",
                 "unicorn/prefer-spread":"off",

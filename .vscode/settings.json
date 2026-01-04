@@ -36,33 +36,33 @@
 		"source.fixAll.stylelint": "explicit",
 		"source.organizeImports": "never"
 	},
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
 	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[css]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[scss]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[json]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[markdown]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[jsonc]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	"[vue]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
 	// extensions
 	"extensions.ignoreRecommendations": true,
@@ -107,19 +107,22 @@
 		"**/.git/subtree-cache/**": true,
 		"**/.vscode/**": true,
 		"**/node_modules/**": true,
+		"**/uni_modules/**": true,
+		"**/miniprogram_npm/**": true,
 		"**/tmp/**": true,
 		"**/bower_components/**": true,
 		"**/dist/**": true,
 		"**/yarn.lock": true
 	},
 
-	"typescript.tsserver.exclude": ["**/node_modules", "**/dist", "**/.turbo"],
+	"typescript.tsserver.exclude": ["**/node_modules", "**/dist", "**/.turbo","**/uni_modules","**/miniprogram_npm"],
 
 	// search
 	"search.searchEditor.singleClickBehaviour": "peekDefinition",
 	"search.followSymlinks": false,
 	// 在使用搜索功能时，将这些文件夹/文件排除在外
 	"search.exclude": {
+		"**/uni_modules": true,
 		"**/miniprogram_npm":true,
 		"**/node_modules": true,
 		"**/*.log": true,
@@ -226,5 +229,15 @@
 	"vue.server.hybridMode": true,
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"oxc.enable": false,
-	"cSpell.words": ["archiver", "axios", "dotenv", "isequal", "jspm", "napi", "nolebase", "rollup", "vitest"]
+	"cSpell.words": [
+		"archiver",
+		"axios",
+		"dotenv",
+		"isequal",
+		"jspm",
+		"napi",
+		"nolebase",
+		"rollup",
+		"vitest"
+	]
 }

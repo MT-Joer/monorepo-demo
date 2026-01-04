@@ -1,13 +1,14 @@
-import { http } from '@/utils/http'
-import type { IFooItem } from './foo.d'
+import type { IFooItem } from "./foo.d";
 
-export { IFooItem }
+import { http } from "@/utils/http";
+
+export { IFooItem };
 
 /** get 请求 */
 export const getMockAPI = (name: string) => {
-  return http<IFooItem>({
-    url: `/api/get`,
-    method: 'GET',
-    query: { name },
-  })
-}
+    return http<IFooItem>({
+        url: `/api/get`,
+        method: "GET",
+        query: { name },
+    });
+};

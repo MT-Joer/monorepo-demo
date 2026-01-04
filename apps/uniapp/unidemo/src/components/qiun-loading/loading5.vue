@@ -1,19 +1,19 @@
 <template>
-  <view class="container loading6">
-    <view class="shape shape1"></view>
-    <view class="shape shape2"></view>
-    <view class="shape shape3"></view>
-    <view class="shape shape4"></view>
-  </view>
+    <view class="container loading6">
+        <view class="shape shape1"></view>
+        <view class="shape shape2"></view>
+        <view class="shape shape3"></view>
+        <view class="shape shape4"></view>
+    </view>
 </template>
 
 <script>
 export default {
-  name: 'loading6',
-  data() {
-    return {}
-  },
-}
+    name: "Loading6",
+    data() {
+        return {};
+    },
+};
 </script>
 <style scoped="true">
 .container {
@@ -23,7 +23,6 @@ export default {
 }
 
 .container.loading6 {
-  animation: rotation 1s infinite;
   animation: rotation 1s infinite;
 }
 
@@ -63,27 +62,22 @@ export default {
 
 .loading6 .shape1 {
   animation: animation6shape1 2s linear 0s infinite normal;
-  animation: animation6shape1 2s linear 0s infinite normal;
 }
 
 @keyframes animation6shape1 {
   0% {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   25% {
-    transform: translate(0, 18px);
     transform: translate(0, 18px);
   }
 
   50% {
     transform: translate(18px, 18px);
-    transform: translate(18px, 18px);
   }
 
   75% {
-    transform: translate(18px, 0);
     transform: translate(18px, 0);
   }
 }
@@ -91,48 +85,39 @@ export default {
 @keyframes animation6shape1 {
   0% {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   25% {
-    transform: translate(0, 18px);
     transform: translate(0, 18px);
   }
 
   50% {
     transform: translate(18px, 18px);
-    transform: translate(18px, 18px);
   }
 
   75% {
-    transform: translate(18px, 0);
     transform: translate(18px, 0);
   }
 }
 
 .loading6 .shape2 {
   animation: animation6shape2 2s linear 0s infinite normal;
-  animation: animation6shape2 2s linear 0s infinite normal;
 }
 
 @keyframes animation6shape2 {
   0% {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   25% {
-    transform: translate(-18px, 0);
     transform: translate(-18px, 0);
   }
 
   50% {
     transform: translate(-18px, 18px);
-    transform: translate(-18px, 18px);
   }
 
   75% {
-    transform: translate(0, 18px);
     transform: translate(0, 18px);
   }
 }
@@ -140,48 +125,39 @@ export default {
 @keyframes animation6shape2 {
   0% {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   25% {
-    transform: translate(-18px, 0);
     transform: translate(-18px, 0);
   }
 
   50% {
     transform: translate(-18px, 18px);
-    transform: translate(-18px, 18px);
   }
 
   75% {
-    transform: translate(0, 18px);
     transform: translate(0, 18px);
   }
 }
 
 .loading6 .shape3 {
   animation: animation6shape3 2s linear 0s infinite normal;
-  animation: animation6shape3 2s linear 0s infinite normal;
 }
 
 @keyframes animation6shape3 {
   0% {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   25% {
-    transform: translate(18px, 0);
     transform: translate(18px, 0);
   }
 
   50% {
     transform: translate(18px, -18px);
-    transform: translate(18px, -18px);
   }
 
   75% {
-    transform: translate(0, -18px);
     transform: translate(0, -18px);
   }
 }
@@ -189,48 +165,39 @@ export default {
 @keyframes animation6shape3 {
   0% {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   25% {
-    transform: translate(18px, 0);
     transform: translate(18px, 0);
   }
 
   50% {
     transform: translate(18px, -18px);
-    transform: translate(18px, -18px);
   }
 
   75% {
-    transform: translate(0, -18px);
     transform: translate(0, -18px);
   }
 }
 
 .loading6 .shape4 {
   animation: animation6shape4 2s linear 0s infinite normal;
-  animation: animation6shape4 2s linear 0s infinite normal;
 }
 
 @keyframes animation6shape4 {
   0% {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   25% {
-    transform: translate(0, -18px);
     transform: translate(0, -18px);
   }
 
   50% {
     transform: translate(-18px, -18px);
-    transform: translate(-18px, -18px);
   }
 
   75% {
-    transform: translate(-18px, 0);
     transform: translate(-18px, 0);
   }
 }
@@ -238,21 +205,17 @@ export default {
 @keyframes animation6shape4 {
   0% {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   25% {
-    transform: translate(0, -18px);
     transform: translate(0, -18px);
   }
 
   50% {
     transform: translate(-18px, -18px);
-    transform: translate(-18px, -18px);
   }
 
   75% {
-    transform: translate(-18px, 0);
     transform: translate(-18px, 0);
   }
 }

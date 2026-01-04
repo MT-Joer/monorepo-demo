@@ -1,22 +1,24 @@
 <template>
-  <view class="qiun-title-bar">
-    <view class="qiun-title-dot"></view>
-    <view class="qiun-title-text">{{ title }}</view>
-  </view>
+    <view class="qiun-title-bar">
+        <view class="qiun-title-dot"></view>
+        <view class="qiun-title-text">
+            {{ title }}
+        </view>
+    </view>
 </template>
 
 <script>
 export default {
-  name: 'title-bar',
-  props: {
-    title: {
-      type: String,
-      default: '',
+    name: "TitleBar",
+    props: {
+        title: {
+            type: String,
+            default: "",
+        },
     },
-  },
-  mounted() {},
-  methods: {},
-}
+    mounted() {},
+    methods: {},
+};
 </script>
 
 <style>

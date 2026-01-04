@@ -1,19 +1,19 @@
 <template>
-  <view class="container loading3">
-    <view class="shape shape1"></view>
-    <view class="shape shape2"></view>
-    <view class="shape shape3"></view>
-    <view class="shape shape4"></view>
-  </view>
+    <view class="container loading3">
+        <view class="shape shape1"></view>
+        <view class="shape shape2"></view>
+        <view class="shape shape3"></view>
+        <view class="shape shape4"></view>
+    </view>
 </template>
 
 <script>
 export default {
-  name: 'loading3',
-  data() {
-    return {}
-  },
-}
+    name: "Loading3",
+    data() {
+        return {};
+    },
+};
 </script>
 
 <style scoped="true">
@@ -24,7 +24,6 @@ export default {
 }
 
 .container.loading3 {
-  animation: rotation 1s infinite;
   animation: rotation 1s infinite;
 }
 
@@ -74,17 +73,14 @@ export default {
 
 .loading3 .shape1 {
   animation: animation3shape1 0.5s ease 0s infinite alternate;
-  animation: animation3shape1 0.5s ease 0s infinite alternate;
 }
 
 @keyframes animation3shape1 {
   from {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   to {
-    transform: translate(5px, 5px);
     transform: translate(5px, 5px);
   }
 }
@@ -92,28 +88,23 @@ export default {
 @keyframes animation3shape1 {
   from {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   to {
-    transform: translate(5px, 5px);
     transform: translate(5px, 5px);
   }
 }
 
 .loading3 .shape2 {
   animation: animation3shape2 0.5s ease 0s infinite alternate;
-  animation: animation3shape2 0.5s ease 0s infinite alternate;
 }
 
 @keyframes animation3shape2 {
   from {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   to {
-    transform: translate(-5px, 5px);
     transform: translate(-5px, 5px);
   }
 }
@@ -121,28 +112,23 @@ export default {
 @keyframes animation3shape2 {
   from {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   to {
-    transform: translate(-5px, 5px);
     transform: translate(-5px, 5px);
   }
 }
 
 .loading3 .shape3 {
   animation: animation3shape3 0.5s ease 0s infinite alternate;
-  animation: animation3shape3 0.5s ease 0s infinite alternate;
 }
 
 @keyframes animation3shape3 {
   from {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   to {
-    transform: translate(5px, -5px);
     transform: translate(5px, -5px);
   }
 }
@@ -150,28 +136,23 @@ export default {
 @keyframes animation3shape3 {
   from {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   to {
-    transform: translate(5px, -5px);
     transform: translate(5px, -5px);
   }
 }
 
 .loading3 .shape4 {
   animation: animation3shape4 0.5s ease 0s infinite alternate;
-  animation: animation3shape4 0.5s ease 0s infinite alternate;
 }
 
 @keyframes animation3shape4 {
   from {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   to {
-    transform: translate(-5px, -5px);
     transform: translate(-5px, -5px);
   }
 }
@@ -179,11 +160,9 @@ export default {
 @keyframes animation3shape4 {
   from {
     transform: translate(0, 0);
-    transform: translate(0, 0);
   }
 
   to {
-    transform: translate(-5px, -5px);
     transform: translate(-5px, -5px);
   }
 }

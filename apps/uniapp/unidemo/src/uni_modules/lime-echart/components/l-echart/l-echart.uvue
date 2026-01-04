@@ -1,6 +1,6 @@
 <template>
 	<!-- #ifdef APP -->
-	<web-view class="lime-echart" ref="chartRef" @load="loaded" :style="[customStyle]" 
+	<web-view class="lime-echart" ref="chartRef" @load="loaded" :style="[customStyle]"
 		:webview-styles="[webviewStyles]" src="/uni_modules/lime-echart/static/uvue.html?v=10112">
 	</web-view>
 	<!-- #endif -->
@@ -8,7 +8,7 @@
 	<div class="lime-echart" ref="chartRef"></div>
 	<!-- #endif -->
 	<!-- #ifndef H5 || APP-->
-	<canvas class="lime-echart" :id="canvasid" :canvas-id="canvasid" 
+	<canvas class="lime-echart" :id="canvasid" :canvas-id="canvasid"
 		@touchstart="touchstart"
 		@touchmove="touchmove"
 		@touchend="touchend">
@@ -74,7 +74,7 @@
 	// let context = null as UniWebViewElement | null
 	let chart = null as Echarts | null
 	let chartRef = ref<UniWebViewElement | null>(null)
-	
+
 	const trigger = () => {
 		// #ifdef APP
 		if (finished.value) {
@@ -95,7 +95,7 @@
 			}
 		}
 		// #endif
-		
+
 		if(chart != null){
 			while(callbackMap.length > 0){
 				const callback = callbackMap.pop() as EchartsResolve
@@ -103,7 +103,7 @@
 			}
 		}
 	}
-	
+
 	// #ifdef APP
 	const loaded = (event : UniWebViewLoadEvent) => {
 		event.stopPropagation()
@@ -113,8 +113,8 @@
 		emits('finished')
 	}
 	// #endif
-	
-	
+
+
 	const _next = () : boolean => {
 		if (chart == null) {
 			console.warn(`组件还未初始化，请先使用 init`)
@@ -150,7 +150,7 @@
 		if (_next()) return
 		chart!.canvasToTempFilePath(opt);
 	}
-	
+
 	// #ifdef APP
 	function init(callback : ((chart : Echarts) => void) | null) : Promise<Echarts> {
 
@@ -163,8 +163,8 @@
 		})
 	}
 	// #endif
-	// #ifndef APP 
-	// #ifndef WEB 
+	// #ifndef APP
+	// #ifndef WEB
 	let use2dCanvas = canIUseCanvas2d()
 	const getContext = async () =>{
 		return getRect(`#${canvasid}`, {context: instance.proxy!, type: use2dCanvas ? 'fields': 'boundingClientRect'}).then(res => {
@@ -179,7 +179,7 @@
 					const ctx = uni.createCanvasContext(canvasid, instance.proxy);
 					canvas =  new Canvas(ctx, instance.proxy, false);
 				}
-				
+
 				return { canvas, width, height, devicePixelRatio: dpr, node };
 			} else {
 				return {}
@@ -225,15 +225,15 @@
 	const touchend = (e) => {
 		if(chart == null) return
 		const handler = chart.getZr().handler;
-		
+
 		const touch = {
 			x: 999999999,
 			y: 999999999
 		}
-		
+
 		dispatch.call(handler, 'mousemove', touch)
 		dispatch.call(handler, 'touchend', touch)
-		
+
 	}
 	async function init(echarts: any, ...args: any[]): Promise<Echarts>{
 		if(echarts == null){
@@ -243,24 +243,24 @@
 		let theme:string|null=null
 		let opts={}
 		let callback:Function|null=null;
-		
+
 		args.forEach(item =>{
-			if(typeof item === 'function') {
+			if(typeof item == 'function') {
 				callback = item
 			} else if(['string'].includes(typeof item)){
 				theme = item
-			} else if(typeof item === 'object'){
+			} else if(typeof item == 'object'){
 				opts = item
 			}
 		})
-		
+
 		// #ifdef WEB
 		chart = echarts.init(chartRef.value, theme, opts)
 		window.addEventListener('touchstart', touchstart)
 		window.addEventListener('touchmove', touchmove)
 		window.addEventListener('touchend', touchend)
 		// #endif
-		
+
 		// #ifndef WEB
 		let config = await getContext();
 		setCanvasCreator(echarts, config)
@@ -290,7 +290,7 @@
 		// #endif
 	})
 	// #endif
-	
+
 	defineExpose({
 		init,
 		setOption,

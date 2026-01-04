@@ -1,18 +1,18 @@
-import { createPinia } from 'pinia'
-import { createPersistedState } from 'pinia-plugin-persistedstate' // 数据持久化
+import { createPinia } from "pinia";
+import { createPersistedState } from "pinia-plugin-persistedstate"; // 数据持久化
 
-const store = createPinia()
+const store = createPinia();
 store.use(
-  createPersistedState({
-    storage: {
-      getItem: uni.getStorageSync,
-      setItem: uni.setStorageSync,
-    },
-  }),
-)
+    createPersistedState({
+        storage: {
+            getItem: uni.getStorageSync,
+            setItem: uni.setStorageSync,
+        },
+    }),
+);
 
-export default store
+export default store;
 
+export * from "./count";
 // 模块统一导出
-export * from './user'
-export * from './count'
+export * from "./user";

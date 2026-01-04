@@ -8,15 +8,23 @@
 </route>
 
 <template>
-  <view class="mt-4">
-    进过多次测试发现，粘贴的css代码块在如下情况时会出现格式化问题：
-    <view class="ml-4">粘贴的css代码块中类名上面不包含空行(与大小写无关)</view>
-    <view class="ml-4 text-green-600">1. 中间有空行的，正常，不用处理；</view>
-    <view class="ml-4 text-red-600">
-      2. 中间没有空行的，格式化异常，通过 ctrl+Z，ctrl+S 可以搞定
+    <view class="mt-4">
+        进过多次测试发现，粘贴的css代码块在如下情况时会出现格式化问题：
+        <view class="ml-4">
+            粘贴的css代码块中类名上面不包含空行(与大小写无关)
+        </view>
+        <view class="ml-4 text-green-600">
+            1. 中间有空行的，正常，不用处理；
+        </view>
+        <view class="ml-4 text-red-600">
+            2. 中间没有空行的，格式化异常，通过 ctrl+Z，ctrl+S 可以搞定
+        </view>
+        <image class="css-img mt-2"
+               height="885"
+               mode="scaleToFill"
+               src="./css.png"
+               width="688" />
     </view>
-    <image src="./css.png" mode="scaleToFill" class="css-img mt-2" width="688" height="885" />
-  </view>
 </template>
 
 <script lang="ts" setup>
@@ -25,6 +33,7 @@
 
 <style lang="scss" scoped>
 // 最初的代码如下（版本1）
+
 /*
 .test{
     background: #FFF;
@@ -35,6 +44,7 @@
 */
 
 // 中间有空行可以正常格式化（版本2）
+
 /*
 .test{
     background: #FFF;

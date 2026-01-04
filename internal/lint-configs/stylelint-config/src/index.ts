@@ -9,6 +9,7 @@
 
   说明：该配置忽略 JS/TS/JSON/MD 等非样式文件；若特定 package 有特殊需求，可以在该 package 内覆写。
 */
+import { configMiniprogram } from "./config/miniprogram";
 
 export default {
     // 继承的预设配置
@@ -28,6 +29,7 @@ export default {
 
     // 针对不同文件类型的特殊配置覆盖
     overrides: [
+        ...configMiniprogram(),
         // HTML 和 Vue 文件的配置
         {
             // 使用 postcss-html 解析器处理 HTML/Vue 中的样式块

@@ -1,23 +1,25 @@
 <template>
-  <view class="chartsview">
-    <view class="charts-error"></view>
-    <view class="charts-font">{{ errorMessage == null ? '请点击重试' : errorMessage }}</view>
-  </view>
+    <view class="chartsview">
+        <view class="charts-error"></view>
+        <view class="charts-font">
+            {{ errorMessage === null ? '请点击重试' : errorMessage }}
+        </view>
+    </view>
 </template>
 
 <script>
 export default {
-  name: 'qiun-error',
-  props: {
-    errorMessage: {
-      type: String,
-      default: null,
+    name: "QiunError",
+    props: {
+        errorMessage: {
+            type: String,
+            default: null,
+        },
     },
-  },
-  data() {
-    return {}
-  },
-}
+    data() {
+        return {};
+    },
+};
 </script>
 
 <style>

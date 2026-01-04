@@ -50,7 +50,7 @@
 			};
 
 			function stringify(key, value) {
-				if (typeof value === 'object' && value !== null) {
+				if (typeof value == 'object' && value !== null) {
 					if (cache.indexOf(value) !== -1) {
 						return;
 					}
@@ -168,9 +168,9 @@
 					})
 				}
 			}
-			
+
 			document.addEventListener('touchmove', () => {
-				
+
 			})
 		</script>
 	</body>

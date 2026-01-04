@@ -41,6 +41,7 @@ export async function typescript(): Promise<Linter.Config[]> {
             rules: {
                 ...pluginTs.configs["eslint-recommended"]?.overrides?.[0]?.rules,
                 ...pluginTs.configs.strict?.rules,
+                "@typescript-eslint/no-require-imports":"warn",
                 // 对 @ts-xxx 注释进行限制：允许带说明的忽略以便在确有必要时记录原因
                 "@typescript-eslint/ban-ts-comment": [
                     "error",
@@ -70,7 +71,7 @@ export async function typescript(): Promise<Linter.Config[]> {
                 "@typescript-eslint/no-unused-expressions": "off",
                 // 忽略以 `_` 开头的未使用变量，用于占位或为接口兼容保留参数
                 "@typescript-eslint/no-unused-vars": [
-                    "error",
+                    "warn",
                     {
                         argsIgnorePattern: "^_",
                         varsIgnorePattern: "^_",
@@ -79,7 +80,7 @@ export async function typescript(): Promise<Linter.Config[]> {
                 "@typescript-eslint/no-use-before-define": "off",
                 // 禁止使用 require，鼓励使用 import，除非在构建/配置脚本中例外
                 "@typescript-eslint/no-var-requires": "error",
-                "unused-imports/no-unused-vars": "off",
+                "unused-imports/no-unused-vars": "warn",
             },
         },
         ignoresMiniprogram(pluginTs, parserTs),

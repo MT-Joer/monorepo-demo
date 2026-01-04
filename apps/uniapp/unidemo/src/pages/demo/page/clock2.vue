@@ -6,31 +6,42 @@
 </route>
 
 <template>
-  <view class="mt-4 h-10 text-center">动态时钟</view>
-  <view class="clock-box">
-    <view class="clock" :style="{ '--ds': ds, '--dm': dm, '--dh': dh }">
-      <view class="clock-pane">
-        <text class="clock-num" :style="{ '--i': n }" v-for="n in 12" :key="n">{{ n }}</text>
-      </view>
-      <view class="clock-scales">
-        <text class="clock-scale" :style="{ '--i': n }" v-for="n in 60" :key="n"></text>
-      </view>
-
-      <view class="clock-hour"></view>
-      <view class="clock-min"></view>
-      <view class="clock-sec"></view>
+    <view class="mt-4 h-10 text-center">
+        动态时钟
     </view>
-  </view>
+    <view class="clock-box">
+        <view class="clock" :style="{ '--ds': ds, '--dm': dm, '--dh': dh }">
+            <view class="clock-pane">
+                <text v-for="n in 12"
+                      :key="n"
+                      class="clock-num"
+                      :style="{ '--i': n }">
+                    {{ n }}
+                </text>
+            </view>
+            <view class="clock-scales">
+                <text v-for="n in 60"
+                      :key="n"
+                      class="clock-scale"
+                      :style="{ '--i': n }">
+                </text>
+            </view>
+
+            <view class="clock-hour"></view>
+            <view class="clock-min"></view>
+            <view class="clock-sec"></view>
+        </view>
+    </view>
 </template>
 
 <script lang="ts" setup>
-const d = new Date()
-const h = d.getHours()
-const m = d.getMinutes()
-const s = d.getSeconds()
-const ds = ref(s)
-const dm = ref(m + s / 60)
-const dh = ref(h + m / 60 + s / 3600)
+const d = new Date();
+const h = d.getHours();
+const m = d.getMinutes();
+const s = d.getSeconds();
+const ds = ref(s);
+const dm = ref(m + s / 60);
+const dh = ref(h + m / 60 + s / 3600);
 </script>
 
 <style lang="scss">
@@ -41,6 +52,8 @@ const dh = ref(h + m / 60 + s / 3600)
 }
 
 .clock {
+  --step: 60s;
+
   position: relative;
   display: flex;
   align-items: center;
@@ -50,7 +63,6 @@ const dh = ref(h + m / 60 + s / 3600)
   font-size: 24px;
   border-radius: 20px;
   box-shadow: 2px 2px 20px #0000001a;
-  --step: 60s;
 }
 
 .clock-pane {

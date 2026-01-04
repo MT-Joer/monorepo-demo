@@ -240,7 +240,7 @@ export async function vue(): Promise<Linter.Config[]> {
 				 * vue/no-empty-pattern: 禁止空的解构模式
 				 * 设置原因: 空模式 {} 或 [] 表示的意图不明确，通常是代码错误，应该避免
 				 */
-                "vue/no-empty-pattern": "error",
+                "vue/no-empty-pattern": [ "error", { "allowObjectPatternsAsParameters": false } ],
 
                 /**
 				 * vue/no-extra-parens: 禁止不必要的括号

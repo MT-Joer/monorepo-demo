@@ -7,15 +7,15 @@
  */
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const fs = require('fs')
+const fs = require("node:fs");
 
-const filePath = './src/manifest.json'
+const filePath = "./src/manifest.json";
 
 if (fs.existsSync(filePath)) {
-  // console.log(`${filePath}存在`)
+    // console.log(`${filePath}存在`)
 } else {
-  // console.log(`${filePath}不存在，需要创建`)
-  fs.writeFile(filePath, '{}\n', {}, () => {
+    // console.log(`${filePath}不存在，需要创建`)
+    fs.writeFile(filePath, "{}\n", {}, () => {
     // console.log(`${filePath}已经成功创建，并写入{}`)
-  })
+    });
 }
