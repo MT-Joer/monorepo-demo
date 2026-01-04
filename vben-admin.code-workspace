@@ -13,6 +13,10 @@
       "path": "apps/miniprogram/wx-mall-master"
     },
     {
+      "name": "unibest",
+      "path": "apps/uniapp/unidemo"
+    },
+    {
       "name": "@vben/playground",
       "path": "apps/web/playground"
     },
