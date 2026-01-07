@@ -2,8 +2,8 @@
 // <wxs src="../../utils/tools.wxs" module="tools" />
 // tools.tofix2(12.33333)
 module.exports = {
-  msg: 'wxs-tools',
-  tofix2: function(num) {
-    return num.toFixed(2)
-  }
+	msg: "wxs-tools",
+	tofix2: function (num) {
+		return num.toFixed(2);
+	},
 };

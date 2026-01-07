@@ -27,7 +27,9 @@ import {
     typescript,
     unicorn,
     vue,
+    wxmlConfig,
 } from "./configs";
+import { prettier } from "./configs/prettier";
 import { customConfig } from "./custom-config";
 
 type FlatConfig = Linter.Config;
@@ -39,7 +41,7 @@ async function defineConfig(config: FlatConfig[] = []) {
         vue(),
         javascript(),
         ignores(),
-        // prettier(),
+        prettier(),
         typescript(),
         jsonc(),
         disableds(),
@@ -53,6 +55,7 @@ async function defineConfig(config: FlatConfig[] = []) {
         regexp(),
         command(),
         turbo(),
+        wxmlConfig(),
         ...customConfig,
         ...config,
     ];

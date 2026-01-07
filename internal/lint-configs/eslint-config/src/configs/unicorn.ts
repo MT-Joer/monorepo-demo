@@ -20,10 +20,10 @@ export async function unicorn(): Promise<Linter.Config[]> {
             plugins: {
                 unicorn: pluginUnicorn,
             },
+            ignores: [ "**/*.wxml" ],
             rules: {
                 ...pluginUnicorn.configs.recommended.rules,
                 "unicorn/no-abusive-eslint-disable":"off",
-
                 "unicorn/no-this-assignment":"warn",
                 "unicorn/no-empty-file":"off",
                 "unicorn/prefer-ternary":"off",

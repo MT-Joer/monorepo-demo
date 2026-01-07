@@ -4,6 +4,7 @@
 	"language": "en,en-US",
 	"allowCompoundWords": true,
 	"words": [
+		"wxml",
 		"acmr",
 		"antd",
 		"antdv",
@@ -57,6 +58,11 @@
 		"yxxx"
 	],
 	"ignorePaths": [
+		"**/uni_modules/**",
+		"**/miniprogram_npm/**",
+
+		"**/node_modules/**",
+
 		"**/node_modules/**",
 		"**/dist/**",
 		"**/*-dist/**",

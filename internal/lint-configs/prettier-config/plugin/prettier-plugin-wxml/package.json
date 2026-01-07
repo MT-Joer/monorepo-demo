@@ -1,0 +1,19 @@
+{
+  "name": "@venus/prettier-plugin-wxml",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "peerDependencies": {
+    "prettier": "^2.8.0 || ^3.0.0"
+  },
+  "dependencies": {
+    "@babel/generator": "^7.28.5",
+    "prettier-plugin-mp": "^2.5.0"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.28.5"
+  }
+}

@@ -39,6 +39,7 @@ export async function javascript(): Promise<Linter.Config[]> {
             linterOptions: {
                 reportUnusedDisableDirectives: true,
             },
+            ignores: [ "**/*.wxml" ],
             plugins: {
                 "unused-imports": pluginUnusedImports,
             },

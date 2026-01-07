@@ -21,6 +21,14 @@ const routes: RouteRecordRaw[] = [
                 path: "/demos/ant-design",
                 component: () => import("#/views/demos/antd/index.vue"),
             },
+            {
+                meta: {
+                    title: "mcp演示",
+                },
+                name: "mcpDemo",
+                path: "/demos/mcp-demo",
+                component: () => import("#/views/demos/mcpDemo/index.vue"),
+            },
         ],
     },
 ];

@@ -27,7 +27,8 @@
 		}
 	},
 	"dependencies": {
-				"eslint": "catalog:",
+		"@wxml/parser": "^0.4.0",
+		"eslint": "catalog:",
 		"eslint-config-turbo": "catalog:",
 		"eslint-plugin-command": "catalog:",
 		"eslint-plugin-eslint-comments": "catalog:",

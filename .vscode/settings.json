@@ -64,6 +64,9 @@
 	"[vue]": {
 		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 	},
+	"[wxml]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 	// extensions
 	"extensions.ignoreRecommendations": true,
 
@@ -188,6 +191,8 @@
 		"wxml"
 	],
 
+	"eslint.format.enable": true,
+
 	"tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]],
 
 	"github.copilot.enable": {
@@ -240,5 +245,5 @@
 		"nolebase",
 		"rollup",
 		"vitest"
-	]
+	],
 }

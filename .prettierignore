@@ -1,0 +1,11 @@
+
+*.log
+node_modules/
+dist/
+build/
+
+miniprogram_npm
+uni_modules
+
+# 只格式化 wxml
+!*.wxml

@@ -1,0 +1,29 @@
+{
+  "name": "@venus/prettier-config",
+  "version": "5.0.0",
+  "private": true,
+  "homepage": "https://github.com/venusjs/vue-venus-admin",
+  "bugs": "https://github.com/venusjs/vue-venus-admin/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/venusjs/vue-venus-admin.git",
+    "directory": "internal/lint-configs/prettier-config"
+  },
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./index.mjs",
+  "module": "./index.mjs",
+  "exports": {
+    ".": {
+      "default": "./index.mjs"
+    }
+  },
+  "dependencies": {
+    "@venus/prettier-plugin-wxml": "workspace:*",
+    "prettier": "catalog:",
+    "prettier-plugin-tailwindcss": "catalog:"
+  }
+}

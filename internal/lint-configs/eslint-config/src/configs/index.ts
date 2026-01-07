@@ -15,7 +15,7 @@ export * from "./turbo";
 export * from "./typescript";
 export * from "./unicorn";
 export * from "./vue";
-
+export * from "./wxml";
 /*
 	eslint-config/src/configs/index.ts
 

@@ -17,6 +17,7 @@ export async function prettier(): Promise<Linter.Config[]> {
     ] as const);
     return [
         {
+            files:[ "**/*.wxml", "**/*.wxs" ],
             plugins: {
                 prettier: pluginPrettier,
             },
