@@ -5,7 +5,7 @@ import type { Linter } from "eslint";
 export function customConfigMiniprogram (): Linter.Config[] {
     return [
         {
-            files: [ "apps/**/miniprogram/**/**" ],
+            files: [ "apps/**/miniprogram/**/*.?([cm])[jt]s?(x)" ],
             rules: {
             // ==================== CommonJS 相关 ====================
             // 小程序强制使用 CommonJS，不支持 ES Modules 语法

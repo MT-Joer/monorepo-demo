@@ -20,7 +20,7 @@ export async function jsonc(): Promise<Linter.Config[]> {
 
     return [
         {
-            files: [ "*.json", "**/*.json5", "**/*.jsonc", "*.code-workspace" ],
+            files: [ "**/*.json", "**/*.json5", "**/*.jsonc", "*.code-workspace" ],
             languageOptions: {
                 parser: parserJsonc as any,
             },

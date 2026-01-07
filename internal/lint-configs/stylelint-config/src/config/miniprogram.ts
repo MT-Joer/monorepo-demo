@@ -6,10 +6,11 @@ type ConfigOverride = NonNullable<Config["overrides"]>[number];
 
 export function configMiniprogram():ConfigOverride[] {
     return [
+        // WXSS 文件的配置（纯样式文件）
         {
-            // 使用 postcss-html 解析器处理 HTML/Vue 中的样式块
-            files: [ "**/apps/miniprogram/**/*.{wxss,css,scss,less,vue}", "**/apps/uniapp/**/*.{css,scss,less,vue}" ],
-            customSyntax: "postcss-html",
+            files: [ "**/apps/miniprogram/**/*.wxss", "**/apps/uniapp/**/*.css" ],
+            customSyntax: "postcss",
+            extends: [ "stylelint-config-recess-order" ],
             rules: {
                 // 允许 rpx 单位（uni-app 响应式单位）
                 "unit-no-unknown": [
@@ -18,11 +19,38 @@ export function configMiniprogram():ConfigOverride[] {
                         ignoreUnits: [ "rpx" ]
                     }
                 ],
-				  // 允许未知的属性值（uni-app 特有值）
+                // 允许未知的属性值（uni-app 特有值）
                 "declaration-property-value-no-unknown": null,
-				  // 允许 uni-app 的条件编译注释
+                // 允许 uni-app 的条件编译注释
                 "comment-no-empty": null,
-				  // 小程序特有的选择器
+                // 小程序特有的选择器
+                "selector-type-no-unknown": [
+                    true,
+                    {
+                        ignore: [ "custom-elements" ],
+                        ignoreTypes: [ "/^(page|view|text|image|button|input|scroll-view|swiper|navigator)/" ]
+                    }
+                ],
+            },
+        },
+        // Vue 和 HTML 中的样式块
+        {
+            files: [ "**/apps/miniprogram/**/*.{vue,html}", "**/apps/uniapp/**/*.{vue,html}" ],
+            customSyntax: "postcss-html",
+            extends: [ "stylelint-config-recess-order" ],
+            rules: {
+                // 允许 rpx 单位
+                "unit-no-unknown": [
+                    true,
+                    {
+                        ignoreUnits: [ "rpx" ]
+                    }
+                ],
+                // 允许未知的属性值
+                "declaration-property-value-no-unknown": null,
+                // 允许 uni-app 的条件编译注释
+                "comment-no-empty": null,
+                // 小程序特有的选择器
                 "selector-type-no-unknown": [
                     true,
                     {

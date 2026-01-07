@@ -7,9 +7,19 @@
 // 上面的代码在 scss里面格式化是OK的，在Vue里面会有问题
 
 .test {
-  background: #fff;
+	background: #fff;
 
-  .test1 {
-    color: #f9ff99;
-  }
+	.test1 {
+		color: #f9ff99;
+	}
+}
+
+.revice_address_row .user_info_row .user_phone {
+	position: relative;
+	display: flex;
+	flex: 3;
+	width: 30px;
+	height: 1000%;
+	height: 30px;
+	text-align: right;
 }

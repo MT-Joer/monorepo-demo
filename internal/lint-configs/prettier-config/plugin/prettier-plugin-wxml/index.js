@@ -6,29 +6,61 @@ const { group, hardline, indent, join,  softline  } = doc.builders;
 
 const originalPrinter = prettierPluginMp.printers.wxml;
 
+// Helper: indent each line of a string by the given number of spaces
+function indentLines(content, indentSize) {
+    if (typeof content !== "string") return content;
+    const spaces = " ".repeat(indentSize);
+    return content.split("\n").map(line => line ? spaces + line : line).join("\n");
+}
+
+// Helper: format WXS JavaScript code
+function formatWxsByBabelCompat(jsCode, opts) {
+    try {
+        // Simple formatting: preserve structure but normalize spacing
+        let formatted = jsCode;
+        // Normalize line endings
+        formatted = formatted.replaceAll("\r\n", "\n");
+        // Remove trailing whitespace from each line
+        formatted = formatted.split("\n").map(line => line.trimEnd()).join("\n");
+        return formatted;
+    } catch {
+        return jsCode; // Return original on error
+    }
+}
+
+// Helper: enforce quote style for WXS string literals
+function enforceWxsStringQuotes(code, useSingle) {
+    if (typeof code !== "string") return code;
+    // Simple quote normalization for string literals
+    // Only replace quotes that are clearly string delimiters
+    if (useSingle) {
+        // Replace double quotes with single quotes where safe
+        return code.replaceAll(/"([^"\n]*)"/g, (match, content) => {
+            if (content.includes("'")) return match; // Keep double if contains single
+            return `'${content}'`;
+        });
+    } else {
+        // Replace single quotes with double quotes where safe
+        return code.replaceAll(/'([^'\n]*)'/g, (match, content) => {
+            if (content.includes('"')) return match; // Keep single if contains double
+            return `"${content}"`;
+        });
+    }
+}
+
+// Helper: check if mustache content is a simple identifier
+function isSimpleMustacheIdentifier(innerLines) {
+    if (!Array.isArray(innerLines) || innerLines.length !== 1) return false;
+    const line = innerLines[0].trim();
+    // Simple identifier: letters, numbers, underscore, dots only
+    return /^[a-z_$][\w$.]*$/i.test(line);
+}
+
 function printEndTag(path) {
     const node = path.getValue();
     return `</${node.name}>`;
 }
 
-
-function replaceLineWithSoftline(node) {
-    if (!node || typeof node === "string") return node;
-    if (Array.isArray(node)) return node.map(item => replaceLineWithSoftline(item));
-
-    if (node.type === "line") {
-        return softline;
-    }
-
-    if (node.contents) {
-        return {
-            ...node,
-            contents: replaceLineWithSoftline(node.contents),
-        };
-    }
-
-    return node;
-}
 
 function printMisc(path, opts) {
     const node = path.getValue();
@@ -96,12 +128,11 @@ function printCharData(path, opts, print) {
     const { value } = node;
     if (!value) return "";
     if (value.trim() === "") {
-    // Return whitespace as-is; element-level logic decides whether to keep it
-        return value;
+        // Return empty string for whitespace-only nodes to ensure consistency
+        return "";
     }
     // Normalize inline template expressions
     const normalized = formatWxmlInterpolations(value, opts);
-    // Do not trim() here to avoid silently removing significant leading/trailing spaces in text nodes
     return normalized;
 }
 // Helper: build doc for multi-line mustache printed text, or return null if not applicable
@@ -253,36 +284,8 @@ function printElement(path, opts, print) {
         const hasAnyAttrs = attrsArr.length > 0;
 
         // Simplified: treat <block> as always-block, selected tags as prefer-break.
-        // 如果标签有任何属性且有子节点，强制不内联子节点
-        let shouldInline = (singleTextInline || smallInlineMix) && !isAlwaysBlock && !isPreferBlock && !hasAnyAttrs;
-        // Only <text> strictly checks: if it has any attributes, force break (no inline)
-        if (lowerName === "text" && hasAnyAttrs) {
-            shouldInline = false;
-        }
-        // For <text>, baseline: do not inline unless content is short/simple and structure is trivial
-        if (lowerName === "text") {
-            shouldInline = false;
-            if (!hasAnyAttrs && onlyTextualChildren && !hasNewline && node.children.length === 1) {
-                const only = node.children[0];
-                const rawCombined = getNodeString(only);
-                const trimmed = typeof rawCombined === "string" ? rawCombined.trim() : "";
-                const isSingleMustache = trimmed.startsWith("{{") && trimmed.endsWith("}}");
-                const containsMustache = typeof rawCombined === "string" && rawCombined.includes("{{");
-                if (containsMustache && isSingleMustache) {
-                    const inner = trimmed.slice(2, -2);
-                    // Complexity heuristics: break if contains object/array literal, or has multiple &&, or both && and ||
-                    const hasObjectLiteral = /\{[^}]*:/.test(inner);
-                    const hasArrayLiteral = /\[[^,\]]*,[^\]]*\]/.test(inner) || /^\s*\[/.test(inner.trim());
-                    const andCount = (inner.match(/&&/g) || []).length;
-                    const hasOr = inner.includes("||");
-                    const complex = hasObjectLiteral || hasArrayLiteral || andCount >= 2 || (andCount >= 1 && hasOr);
-                    shouldInline = !complex;
-                } else if (isTextNodeType(only)) {
-                    // single pure text: inline if reasonably short
-                    shouldInline = trimmed.length <= 50;
-                }
-            }
-        }
+        // Determine shouldInline based on tag type and content
+        const shouldInline = (singleTextInline || smallInlineMix) && !isAlwaysBlock && !isPreferBlock && !hasMultipleAttrs;
 
         // Note: <text> is handled via early return above; strict text mode is unused.
 
@@ -310,18 +313,8 @@ function printElement(path, opts, print) {
                 for (const [ i, printed ] of childrenParts.entries()) {
                     if (i > 0) childrenWithBreaks.push(hardline);
                     const entry = childEntries[i];
-                    // Split multi-line text nodes into doc parts separated by hardline
-                    if (entry && (entry.node.type === "WXText" || entry.node.type === "WXCharData") && typeof printed === "string" && printed.includes("\n")) {
-                        const lines = printed.split("\n");
-                        for (const [ li, line_ ] of lines.entries()) {
-                            if (li > 0) childrenWithBreaks.push(hardline);
-                            if (line_ !== "") {
-                                childrenWithBreaks.push(line_);
-                            }
-                        }
-                    } else {
-                        childrenWithBreaks.push(printed);
-                    }
+                    // Don't split multi-line text to avoid instability; trust the printed output
+                    childrenWithBreaks.push(printed);
                 }
                 {
                     // Special-case: multi-line mustache block like "{{\n  title\n}}" inside non-<text> tag
@@ -348,15 +341,6 @@ function printElement(path, opts, print) {
         }
     }
     if (node.endTag) {
-        // 检查是否有属性且没有子节点
-        const hasAttrs = attrsArr.length > 0;
-        const hasChildren = node.children && node.children.length > 0;
-
-        // 如果有属性但没有子节点，结束标签应该换行
-        if (hasAttrs && !hasChildren) {
-            parts.push(hardline);
-        }
-
         parts.push(path.call(print, "endTag"));
     }
     return group(parts);
@@ -365,8 +349,10 @@ function formatInlineJsExpression(expr, opts) {
     if (typeof expr !== "string") return expr;
     // 1) Collapse any newlines (and surrounding spaces) into a single space
     let s = expr.replaceAll(/[ \t]*[\r\n]+[ \t]*/g, " ");
-    // 2) Normalize spaces around logical operators without touching others
+    // 2) Normalize spaces around logical operators
     s = s.replaceAll(/\s*&&\s*/g, " && ").replaceAll(/\s*\|\|\s*/g, " || ");
+    // 3) Normalize multiple spaces to single space
+    s = s.replaceAll(/ {2,}/g, " ");
     return s.trim();
 }
 function isPlaceholderLikeValue(value) {
@@ -411,11 +397,11 @@ function formatWxmlInterpolations(text, opts) {
     if (typeof text !== "string" || !text.includes("{{")) return text;
     return text.replaceAll(/\{\{([\s\S]*?)\}\}/g, (match) => {
         const inner = match.slice(2, -2); // 去掉 {{ }}
-        const leadingWs = inner.match(/^\s*/)[0];
-        const trailingWs = inner.match(/\s*$/)[0];
-        const expr = inner.slice(leadingWs.length, inner.length - trailingWs.length);
-        const formatted = formatInlineJsExpression(expr, opts);
-        return `{{${leadingWs}${formatted}${trailingWs}}}`;
+        const trimmedExpr = inner.trim();
+        if (!trimmedExpr) return "{{}}";
+        const formatted = formatInlineJsExpression(trimmedExpr, opts);
+        // Always use single space for consistency
+        return `{{ ${formatted} }}`;
     });
 }
 

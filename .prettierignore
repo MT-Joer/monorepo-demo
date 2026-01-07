@@ -9,3 +9,4 @@ uni_modules
 
 # 只格式化 wxml
 !*.wxml
+!*.json

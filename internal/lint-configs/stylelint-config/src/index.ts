@@ -72,7 +72,7 @@ export default {
     plugins: [
         "stylelint-order",           // CSS 声明顺序
         "@stylistic/stylelint-plugin", // 代码风格
-        // "stylelint-prettier",        // 与 Prettier 集成
+        // "stylelint-prettier",        // 与 Prettier 集成（已禁用，改用 stylelint 扩展）
         "stylelint-scss",            // SCSS 特定规则
     ],
 
@@ -187,10 +187,13 @@ export default {
         // 禁用 SCSS 操作符后换行规则
         "scss/operator-no-newline-after": null,
 
-        // CSS 类名规则（支持 BEM、工具类、状态类等规范）
-        // 允许的格式：o-, c-, u-, t-, s-, is-, has-, _-, js-, qa- 前缀，支持 BEM __ -- 语法
+        // CSS 类名规则（支持 BEM、工具类、状态类、下划线分隔等规范）
+        // 允许的格式：o-, c-, u-, t-, s-, is-, has-, _-, js-, qa- 前缀，支持 BEM __ -- 语法，支持下划线分隔
         "selector-class-pattern":
-			"^(?:(?:o|c|u|t|s|is|has|_|js|qa)-)?[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:__[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:--[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:[.+])?$",
+			"^(?:(?:o|c|u|t|s|is|has|_|js|qa)-)?[a-zA-Z0-9]+(?:[_-][a-zA-Z0-9]+)*(?:__[a-zA-Z0-9]+(?:[_-][a-zA-Z0-9]+)*)?(?:--[a-zA-Z0-9]+(?:[_-][a-zA-Z0-9]+)*)?(?:[.+])?$",
+
+        // CSS 自定义属性规则（支持 kebab-case 和 camelCase）
+        "custom-property-pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
 
         // 禁用 :not() 伪类符号规则
         "selector-not-notation": null,
