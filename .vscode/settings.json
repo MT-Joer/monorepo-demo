@@ -11,6 +11,7 @@
 	"workbench.editor.limit.value": 5,
 
 	// editor
+    "problems.decorations.enabled": false,
 	"editor.tabSize": 4,
 	"editor.detectIndentation": false,
 	"editor.cursorBlinking": "expand",
